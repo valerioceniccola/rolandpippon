@@ -1,0 +1,17 @@
+.wrap {
+  display: flex;
+  padding: var(--mantine-spacing-xl);
+  border-radius: var(--mantine-radius-md);
+}
+
+.description {
+  font-size: var(--mantine-font-size-sm);
+  margin-top: rem(5px);
+}
+
+.datePicker {
+  min-width: 300px;
+  @media (max-width: $mantine-breakpoint-xs) {
+    min-width: 100%;
+  }
+}
