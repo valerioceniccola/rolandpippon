@@ -7,10 +7,10 @@ const links = [
     link: '#1',
     label: 'Tornei',
     links: [
-      { link: '/docs', label: 'Documentation' },
-      { link: '/resources', label: 'Resources' },
-      { link: '/community', label: 'Community' },
-      { link: '/blog', label: 'Blog' },
+      { link: '/tournaments/edizione1', label: 'Prima edizione' },
+      { link: '/tournaments/edizione2', label: 'Seconda edizione' },
+      { link: '/tournaments/edizione3', label: 'Terza edizione' },
+      { link: '/tournaments/finals24', label: 'Finals 2024' },
     ],
   },
   { link: '/about', label: 'Ranking' },
@@ -59,10 +59,10 @@ export function Navbar() {
   return (
     <>
       <Image
-        src="/logo.png"
+        src="/logo.svg"
         fit="contain"
-        h={24}
-        w="auto"
+        h={180}
+        py={20}
       />
       <header className={classes.header}>
         <Container size="md">
