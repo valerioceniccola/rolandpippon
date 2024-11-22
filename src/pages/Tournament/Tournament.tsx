@@ -7,200 +7,200 @@ import { getTournament } from "../../api/api.ts"
 
 const rounds: IRoundProps[] = [
   {
-    "title":"Ottavi",
-    "seeds":[
+    "title": "Ottavi",
+    "seeds": [
       {
-        "id":1,
-        "date":"3-6 / 5-5 (W.O.)",
-        "teams":[
+        "id": 1,
+        "date": "3-6 / 5-5 (W.O.)",
+        "teams": [
           {
-            "name":"S. Florio"
+            "name": "S. Florio"
           },
           {
-            "name":"V. Ceniccola 🎾"
+            "name": "V. Ceniccola 🎾"
           }
         ]
       },
       {
-        "id":2,
-        "date":"6-4 / 3-6 / 7-2",
-        "teams":[
+        "id": 2,
+        "date": "6-4 / 3-6 / 7-2",
+        "teams": [
           {
-            "name":"A. Vernetti 🎾"
+            "name": "A. Vernetti 🎾"
           },
           {
-            "name":"S. Compagnone"
+            "name": "S. Compagnone"
           }
         ]
       },
       {
-        "id":3,
-        "date":"6-7 / 4-6",
-        "teams":[
+        "id": 3,
+        "date": "6-7 / 4-6",
+        "teams": [
           {
-            "name":"L. Petrone"
+            "name": "L. Petrone"
           },
           {
-            "name":"Cristian 🎾"
+            "name": "Cristian 🎾"
           }
         ]
       },
       {
-        "id":4,
-        "date":"7-5 / 1-6 / 7-4",
-        "teams":[
+        "id": 4,
+        "date": "7-5 / 1-6 / 7-4",
+        "teams": [
           {
-            "name":"Alessandro 🎾"
+            "name": "Alessandro 🎾"
           },
           {
-            "name":"G. Giusti"
+            "name": "G. Giusti"
           }
         ]
       },
       {
-        "id":5,
-        "date":"1-6 / 2-6",
-        "teams":[
+        "id": 5,
+        "date": "1-6 / 2-6",
+        "teams": [
           {
-            "name":"S. Stanziano"
+            "name": "S. Stanziano"
           },
           {
-            "name":"A. Crisci 🎾"
+            "name": "A. Crisci 🎾"
           }
         ]
       },
       {
-        "id":6,
-        "date":"2-6 / 2-6",
-        "teams":[
+        "id": 6,
+        "date": "2-6 / 2-6",
+        "teams": [
           {
-            "name":"E. Gagliotta"
+            "name": "E. Gagliotta"
           },
           {
-            "name":"M. Piacci 🎾"
+            "name": "M. Piacci 🎾"
           }
         ]
       },
       {
-        "id":7,
-        "date":"6-10 / 5-7 / 6-2",
-        "teams":[
+        "id": 7,
+        "date": "6-10 / 5-7 / 6-2",
+        "teams": [
           {
-            "name":"G. Zambrano"
+            "name": "G. Zambrano"
           },
           {
-            "name":"G. Russo 🎾"
+            "name": "G. Russo 🎾"
           }
         ]
       },
       {
-        "id":8,
-        "date":"4-6 / 4-6",
-        "teams":[
+        "id": 8,
+        "date": "4-6 / 4-6",
+        "teams": [
           {
-            "name":"A. Sibillo"
+            "name": "A. Sibillo"
           },
           {
-            "name":"Gianlorenzo 🎾"
+            "name": "Gianlorenzo 🎾"
           }
         ]
       }
     ]
   },
   {
-    "title":"Quarti",
-    "seeds":[
+    "title": "Quarti",
+    "seeds": [
       {
-        "id":9,
-        "date":"7-5 / 3-6 / 10-8",
-        "teams":[
+        "id": 9,
+        "date": "7-5 / 3-6 / 10-8",
+        "teams": [
           {
-            "name":"V. Ceniccola 🎾"
+            "name": "V. Ceniccola 🎾"
           },
           {
-            "name":"A. Vernetti"
+            "name": "A. Vernetti"
           }
         ]
       },
       {
-        "id":10,
-        "date":"7-5 / 4-6 / 1-7",
-        "teams":[
+        "id": 10,
+        "date": "7-5 / 4-6 / 1-7",
+        "teams": [
           {
-            "name":"Cristian"
+            "name": "Cristian"
           },
           {
-            "name":"Alessandro  🎾"
+            "name": "Alessandro  🎾"
           }
         ]
       },
       {
-        "id":11,
-        "date":"6-4 / 6-3",
-        "teams":[
+        "id": 11,
+        "date": "6-4 / 6-3",
+        "teams": [
           {
-            "name":"A. Crisci 🎾"
+            "name": "A. Crisci 🎾"
           },
           {
-            "name":"M. Piacci"
+            "name": "M. Piacci"
           }
         ]
       },
       {
-        "id":12,
-        "date":"6-2 / 6-2",
-        "teams":[
+        "id": 12,
+        "date": "6-2 / 6-2",
+        "teams": [
           {
-            "name":"G. Russo 🎾"
+            "name": "G. Russo 🎾"
           },
           {
-            "name":"Gianlorenzo"
+            "name": "Gianlorenzo"
           }
         ]
       }
     ]
   },
   {
-    "title":"Semifinale",
-    "seeds":[
+    "title": "Semifinale",
+    "seeds": [
       {
-        "id":13,
-        "date":"Da giocare",
-        "teams":[
+        "id": 13,
+        "date": "Da giocare",
+        "teams": [
           {
-            "name":"V. Ceniccola"
+            "name": "V. Ceniccola"
           },
           {
-            "name":"Alessandro"
+            "name": "Alessandro"
           }
         ]
       },
       {
-        "id":14,
-        "date":"Da giocare",
-        "teams":[
+        "id": 14,
+        "date": "Da giocare",
+        "teams": [
           {
-            "name":"A. Crisci"
+            "name": "A. Crisci"
           },
           {
-            "name":"G. Russo"
+            "name": "G. Russo"
           }
         ]
       }
     ]
   },
   {
-    "title":"Finale",
-    "seeds":[
+    "title": "Finale",
+    "seeds": [
       {
-        "id":15,
-        "date":"-",
-        "teams":[
+        "id": 15,
+        "date": "-",
+        "teams": [
           {
-            "name":"-"
+            "name": "-"
           },
           {
-            "name":"-"
+            "name": "-"
           }
         ]
       }
@@ -277,53 +277,61 @@ export function Tournament() {
   return (
     <>
       {
-          (!isLoading && tournament) ?
-            <Box p="lg" mb="lg" bg="gray.2">
-              <Title order={1} mb="xl">{tournament.name}</Title>
+        (!isLoading && tournament) ?
+          <Box p="lg" mb="lg" bg="gray.2">
+            <Title order={1} mb="xl">{tournament.name}</Title>
 
-              <Tabs color="green" defaultValue="info">
+            <Tabs color="green" defaultValue="info">
 
-                <Tabs.List mb="lg">
-                  <Tabs.Tab value="info">
-                    Informazioni
-                  </Tabs.Tab>
-                  <Tabs.Tab value="bracket">
-                    Tabellone
-                  </Tabs.Tab>
-                  <Tabs.Tab value="rules">
-                    Regolamento
-                  </Tabs.Tab>
-                </Tabs.List>
+              <Tabs.List mb="lg">
+                <Tabs.Tab value="info">
+                  Informazioni
+                </Tabs.Tab>
+                <Tabs.Tab value="bracket">
+                  Tabellone
+                </Tabs.Tab>
+                <Tabs.Tab value="rules">
+                  Regolamento
+                </Tabs.Tab>
+              </Tabs.List>
 
-                <Tabs.Panel value="info">
-                  <Text mb="lg">{tournament.date}</Text>
-                  <Text mb="lg">{tournament.description}</Text>
-                  <Gallery
-                    images={images}
-                    enableImageSelection={false}
-                  />
-                </Tabs.Panel>
+              <Tabs.Panel value="info">
+                <Text mb="lg">{tournament.date}</Text>
+                <Text mb="lg">{tournament.description}</Text>
+                {/*<div className="elfsight-app-f0a9de41-52a4-419c-99a0-147abf583eac" data-elfsight-app-lazy></div>*/}
 
-                <Tabs.Panel value="bracket">
-                  <Bracket
-                    rounds={JSON.parse(tournament.rounds)}
-                    // roundTitleComponent={(title, roundIndex: number) => {
-                    //   return <div style={{ textAlign: 'center', color: 'red' }}>{title}</div>;
-                    // }}
-                  />
-                </Tabs.Panel>
+                {
+                  // Esempio id picflow: gal_4xrFVV48aamykpMu
+                  // @ts-ignore
+                  <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
+                }
 
-                <Tabs.Panel value="rules">
-                  <div dangerouslySetInnerHTML={{ __html: tournament.rules }}/>
-                </Tabs.Panel>
+                {/*<Gallery*/}
+                {/*  images={images}*/}
+                {/*  enableImageSelection={false}*/}
+                {/*/>*/}
+              </Tabs.Panel>
 
-              </Tabs>
-            </Box>
-            :
-            <Center>
-              <Loader size="sm" color="gray"/>
-            </Center>
-        }
+              <Tabs.Panel value="bracket">
+                <Bracket
+                  rounds={JSON.parse(tournament.rounds)}
+                  // roundTitleComponent={(title, roundIndex: number) => {
+                  //   return <div style={{ textAlign: 'center', color: 'red' }}>{title}</div>;
+                  // }}
+                />
+              </Tabs.Panel>
+
+              <Tabs.Panel value="rules">
+                <div dangerouslySetInnerHTML={{ __html: tournament.rules }}/>
+              </Tabs.Panel>
+
+            </Tabs>
+          </Box>
+          :
+          <Center>
+            <Loader size="sm" color="gray"/>
+          </Center>
+      }
     </>
   )
 

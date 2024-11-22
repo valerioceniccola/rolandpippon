@@ -76,6 +76,7 @@ export function Admin(props: any) {
     // mode: 'uncontrolled',
     initialValues: {
       id: '',
+      picflowId: '',
       name: '',
       date: '',
       description: '',
@@ -251,7 +252,8 @@ export function Admin(props: any) {
                       date: data.date,
                       description: data.description,
                       rounds: data.rounds,
-                      rules: data.rules
+                      rules: data.rules,
+                      picflowId: data.picflowId
                     })
                   }
                 }
@@ -269,7 +271,8 @@ export function Admin(props: any) {
               }
             })}>
 
-              <SimpleGrid cols={{ base: 1, sm: 3 }}>
+
+              <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                 <TextInput
                   disabled={isLoading || tournamentSelected}
@@ -278,6 +281,18 @@ export function Admin(props: any) {
                   mb="md"
                   {...formHandleTournament.getInputProps('id')}
                 />
+
+                <TextInput
+                  disabled={isLoading}
+                  required
+                  label="Id gallery picflow (dall'embed)"
+                  mb="md"
+                  {...formHandleTournament.getInputProps('picflowId')}
+                />
+
+              </SimpleGrid>
+
+              <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                 <TextInput
                   disabled={isLoading}
