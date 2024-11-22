@@ -1,7 +1,8 @@
-import { Box, Text, useMantineTheme } from "@mantine/core"
+import { Anchor, Box, List, Tabs, Text, ThemeIcon, Title, useMantineTheme } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { Bracket, IRoundProps } from 'react-brackets'
 import { Gallery } from "react-grid-gallery"
+import { IconCheck } from "@tabler/icons-react"
 
 const rounds: IRoundProps[] = [
   {
@@ -104,10 +105,10 @@ const rounds: IRoundProps[] = [
 function getImgSize(imgSrc: string) {
   var newImg = new Image();
 
-  newImg.onload = function() {
+  newImg.onload = function () {
     var height = newImg.height;
     var width = newImg.width;
-    alert ('The image size is '+width+'*'+height);
+    alert('The image size is ' + width + '*' + height);
   }
 
   newImg.src = imgSrc;
@@ -153,8 +154,6 @@ const images = [
 
 export function Dashboard() {
 
-  const theme = useMantineTheme()
-
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -165,18 +164,9 @@ export function Dashboard() {
   return (
     <>
       <Box p="lg" mb="lg" bg="gray.2">
-        <Bracket
-          rounds={rounds}
-          // roundTitleComponent={(title, roundIndex: number) => {
-          //   return <div style={{ textAlign: 'center', color: 'red' }}>{title}</div>;
-          // }}
-        />
-      </Box>
-      <Box>
-        <Gallery
-          images={images}
-          enableImageSelection={false}
-        />
+
+        <Title order={1} mb="xl">Lista dei tornei</Title>
+
       </Box>
     </>
   )

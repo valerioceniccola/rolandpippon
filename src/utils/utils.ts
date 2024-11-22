@@ -1,5 +1,4 @@
 import moment from "moment"
-import 'moment/locale/it'
 
 
 export const getQs = (qs: string) => {

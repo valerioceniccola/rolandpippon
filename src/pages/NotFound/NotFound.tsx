@@ -1,24 +1,20 @@
-import { Title, Text, Button, Container, SimpleGrid, Image } from '@mantine/core';
-import classes from './NotFound.module.css'
+import { Button, Text, Title } from '@mantine/core';
+import { useNavigate } from "react-router-dom"
 
 export function NotFound() {
 
-	return (
-		<Container>
-			<SimpleGrid spacing={{ base: 40, sm: 80 }} cols={{ base: 1, sm: 2 }}>
-				{/*<Image src={image.src} className={classes.mobileImage} />*/}
-				<div>
-					<Title className={classes.title}>Something is not right...</Title>
-					<Text c="dimmed" size="lg">
-						Page you are trying to open does not exist. You may have mistyped the address, or the
-						page has been moved to another URL. If you think this is an error contact support.
-					</Text>
-					<Button variant="outline" size="md" mt="xl" className={classes.control}>
-						Get back to home page
-					</Button>
-				</div>
-				{/*<Image src={image.src} className={classes.desktopImage} />*/}
-			</SimpleGrid>
-		</Container>
-	);
+  const navigate = useNavigate()
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <Title mb="lg">Ops! Pagina fuori dal campo! 🎾</Title>
+      <Text c="dimmed" size="lg">
+        Sembra che questa pagina sia scivolata fuori dai limiti del campo!
+        <br/>Forse cercavi un’altra informazione sul nostro torneo di tennis amatoriale?
+      </Text>
+      <Button variant="outline" size="md" mt="xl" onClick={() => navigate('/')}>
+        Torna alla home
+      </Button>
+    </div>
+  );
 }
