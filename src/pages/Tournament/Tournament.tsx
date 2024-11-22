@@ -5,6 +5,7 @@ import { Gallery } from "react-grid-gallery"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { getTournament } from "../../api/api.ts"
 
+
 const rounds: IRoundProps[] = [
   {
     "title": "Ottavi",
