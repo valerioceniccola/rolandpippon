@@ -129,6 +129,7 @@ export function Navbar() {
                               className={classes.link}
                               key={item.label}
                               to={item.link}
+                              onClick={() => closeDrawer()}
                             >
                               {item.label}
                             </NavLink>
@@ -138,7 +139,11 @@ export function Navbar() {
                     )
                   } else {
                     return (
-                      <NavLink to={link.link} className={classes.link}>
+                      <NavLink
+                        to={link.link}
+                        className={classes.link}
+                        onClick={() => closeDrawer()}
+                      >
                         {link.label}
                       </NavLink>
                     )
