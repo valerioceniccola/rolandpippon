@@ -13,7 +13,7 @@ export function NotFound() {
         <br/>Forse cercavi un’altra informazione sui tornei?
       </Text>
       <Button variant="outline" size="md" mt="xl" onClick={() => navigate('/')}>
-        Torna alla home
+        Torna alla riga di fondo
       </Button>
     </div>
   );
