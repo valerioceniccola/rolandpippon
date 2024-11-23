@@ -1,5 +1,5 @@
 import { Box, Center, Loader, Tabs, Text, Title, useMantineTheme } from "@mantine/core"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getTournament } from "../../api/api.ts"
 
@@ -67,7 +67,10 @@ export function Tournament() {
               </Tabs.Panel>
 
               <Tabs.Panel value="results">
-                <iframe src={tournament.challongeUrl} style={{width: '100%', height: 1500, border: 0,}} />
+                <iframe
+                  src={`${tournament.challongeUrl}?multiplier=1.2`}
+                  style={{width: '100%', height: 1200, border: 0}}
+                />
               </Tabs.Panel>
 
               <Tabs.Panel value="rules">

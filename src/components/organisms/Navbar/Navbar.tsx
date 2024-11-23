@@ -115,7 +115,7 @@ export function Navbar() {
                 links.map((link) => {
                   if (link.links) {
                     return (
-                      <>
+                      <Box key={link.link}>
                         <UnstyledButton className={classes.link} onClick={toggleLinks}>
                           <Center inline>
                             <Box component="span" mr={5}>
@@ -135,11 +135,12 @@ export function Navbar() {
                             </NavLink>
                           ))}
                         </Collapse>
-                      </>
+                      </Box>
                     )
                   } else {
                     return (
                       <NavLink
+                        key={link.link}
                         to={link.link}
                         className={classes.link}
                         onClick={() => closeDrawer()}
