@@ -38,13 +38,14 @@ export function Navbar() {
       return (
         <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
           <Menu.Target>
-            <div
+            <NavLink
+              to={link.link}
               className={classes.link}
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
               </Center>
-            </div>
+            </NavLink>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
         </Menu>

@@ -33,7 +33,7 @@ function App() {
   return (
     <MantineProvider
       theme={theme}
-      defaultColorScheme="light"
+      defaultColorScheme="dark"
     >
       <Helmet
         titleTemplate={`%s | ${projectName}`}
