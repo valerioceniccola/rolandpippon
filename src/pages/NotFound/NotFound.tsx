@@ -10,7 +10,7 @@ export function NotFound() {
       <Title mb="lg">Ops! Pagina fuori dal campo! 🎾</Title>
       <Text c="dimmed" size="lg">
         Sembra che questa pagina sia scivolata fuori dai limiti del campo!
-        <br/>Forse cercavi un’altra informazione sul nostro torneo di tennis amatoriale?
+        <br/>Forse cercavi un’altra informazione sui tornei?
       </Text>
       <Button variant="outline" size="md" mt="xl" onClick={() => navigate('/')}>
         Torna alla home
