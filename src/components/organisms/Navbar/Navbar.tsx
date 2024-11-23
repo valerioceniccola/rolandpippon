@@ -1,4 +1,16 @@
-import { Menu, Group, Center, Burger, Container, Image, Anchor } from '@mantine/core';
+import {
+  Menu,
+  Group,
+  Center,
+  Burger,
+  Container,
+  Image,
+  Anchor,
+  Drawer,
+  ScrollArea,
+  Divider,
+  UnstyledButton, Box, Collapse
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './Navbar.module.css';
 import { NavLink } from "react-router-dom"
@@ -19,7 +31,10 @@ const links = [
 ];
 
 export function Navbar() {
+
   const [opened, { toggle }] = useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
 
   const items = links.map((link) => {
 
@@ -74,14 +89,66 @@ export function Navbar() {
         />
       </NavLink>
       <header className={classes.header}>
+
         <Container size="md">
           <div className={classes.inner}>
             <Group gap={5} visibleFrom="sm">
               {items}
             </Group>
-            <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm"/>
+            <Burger opened={drawerOpened} onClick={toggleDrawer} size="sm" hiddenFrom="sm"/>
           </div>
         </Container>
+
+        <Drawer
+          opened={drawerOpened}
+          onClose={closeDrawer}
+          size="100%"
+          title="Roland Pippon"
+          hiddenFrom="sm"
+          zIndex={1000000}
+        >
+          <ScrollArea h="calc(100vh - 80px" mx="-md">
+
+            <Divider mb="sm"/>
+            <div className={classes.linksMobile}>
+              {
+                links.map((link) => {
+                  if (link.links) {
+                    return (
+                      <>
+                        <UnstyledButton className={classes.link} onClick={toggleLinks}>
+                          <Center inline>
+                            <Box component="span" mr={5}>
+                              {link.label}
+                            </Box>
+                          </Center>
+                        </UnstyledButton>
+                        <Collapse in={linksOpened} className={classes.subMenu}>
+                          {link.links.map((item) => (
+                            <NavLink
+                              className={classes.link}
+                              key={item.label}
+                              to={item.link}
+                            >
+                              {item.label}
+                            </NavLink>
+                          ))}
+                        </Collapse>
+                      </>
+                    )
+                  } else {
+                    return (
+                      <NavLink to={link.link} className={classes.link}>
+                        {link.label}
+                      </NavLink>
+                    )
+                  }
+                })
+              }
+            </div>
+
+          </ScrollArea>
+        </Drawer>
       </header>
     </>
   );

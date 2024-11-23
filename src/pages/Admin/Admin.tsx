@@ -17,53 +17,6 @@ import { auth, db } from "../../api/api-firebase.ts"
 import { getAllTournaments, getTournament } from "../../api/api.ts"
 import { collection, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore"
 
-const roundsJsonExample = JSON.stringify([{
-  "title": "Ottavi",
-  "seeds": [{
-    "id": 1,
-    "date": "3-6 / 5-5 (W.O.)",
-    "teams": [{ "name": "S. Florio" }, { "name": "V. Ceniccola 🎾" }]
-  }, {
-    "id": 2,
-    "date": "6-4 / 3-6 / 7-2",
-    "teams": [{ "name": "A. Vernetti 🎾" }, { "name": "S. Compagnone" }]
-  }, { "id": 3, "date": "6-7 / 4-6", "teams": [{ "name": "L. Petrone" }, { "name": "Cristian 🎾" }] }, {
-    "id": 4,
-    "date": "7-5 / 1-6 / 7-4",
-    "teams": [{ "name": "Alessandro 🎾" }, { "name": "G. Giusti" }]
-  }, { "id": 5, "date": "1-6 / 2-6", "teams": [{ "name": "S. Stanziano" }, { "name": "A. Crisci 🎾" }] }, {
-    "id": 6,
-    "date": "2-6 / 2-6",
-    "teams": [{ "name": "E. Gagliotta" }, { "name": "M. Piacci 🎾" }]
-  }, { "id": 7, "date": "6-10 / 5-7 / 6-2", "teams": [{ "name": "G. Zambrano" }, { "name": "G. Russo 🎾" }] }, {
-    "id": 8,
-    "date": "4-6 / 4-6",
-    "teams": [{ "name": "A. Sibillo" }, { "name": "Gianlorenzo 🎾" }]
-  }]
-}, {
-  "title": "Quarti",
-  "seeds": [{
-    "id": 9,
-    "date": "7-5 / 3-6 / 10-8",
-    "teams": [{ "name": "V. Ceniccola 🎾" }, { "name": "A. Vernetti" }]
-  }, {
-    "id": 10,
-    "date": "7-5 / 4-6 / 1-7",
-    "teams": [{ "name": "Cristian" }, { "name": "Alessandro  🎾" }]
-  }, { "id": 11, "date": "6-4 / 6-3", "teams": [{ "name": "A. Crisci 🎾" }, { "name": "M. Piacci" }] }, {
-    "id": 12,
-    "date": "6-2 / 6-2",
-    "teams": [{ "name": "G. Russo 🎾" }, { "name": "Gianlorenzo" }]
-  }]
-}, {
-  "title": "Semifinale",
-  "seeds": [{
-    "id": 13,
-    "date": "Da giocare",
-    "teams": [{ "name": "V. Ceniccola" }, { "name": "Alessandro" }]
-  }, { "id": 14, "date": "Da giocare", "teams": [{ "name": "A. Crisci" }, { "name": "G. Russo" }] }]
-}, { "title": "Finale", "seeds": [{ "id": 15, "date": "-", "teams": [{ "name": "-" }, { "name": "-" }] }] }])
-
 const htmlRulesExample = `<h1>Regolamento del Torneo di Tennis Locale</h1>                      <h3>1. Iscrizioni e Partecipazione</h3> <ul> \t<li>Il torneo è aperto a tutti i giocatori di età pari o superiore ai 14 anni.</li> \t<li>Ogni partecipante deve presentare un certificato medico sportivo valido.</li> \t<li>La quota di iscrizione è di €20 e deve essere versata al momento della registrazione.</li> </ul>                      <h3>2. Struttura del Torneo</h3> <ul> \t<li>Il torneo si svolgerà in formato ad eliminazione diretta.</li> \t<li>Ogni incontro si disputerà al meglio dei 3 set, con tie-break sul 6-6.</li> \t<li> In caso di pioggia o condizioni meteorologiche avverse, gli incontri saranno rinviati o spostati al coperto, \t\tove possibile. \t</li> </ul>                      <h3>3. Regole di Gioco</h3> <ul> \t<li> Le partite seguiranno il regolamento ufficiale della Federazione Italiana Tennis (FIT).</li> \t<li>È obbligatorio indossare abbigliamento sportivo adeguato e scarpe da tennis.</li> \t<li> I giocatori devono presentarsi almeno 15 minuti prima dell'orario previsto per il loro incontro.</li> </ul>                      <h3>4. Arbitraggio e Comportamento</h3> <ul> \t<li> Le partite saranno autogestite dai giocatori, salvo le fasi finali che avranno un arbitro designato.</li> \t<li>Ogni disputa sarà risolta dal direttore del torneo, il cui giudizio sarà insindacabile.</li> \t<li> È richiesto un comportamento sportivo e rispettoso verso gli avversari e gli organizzatori.</li> </ul>                      <h3>5. Premi</h3> <ul> \t<li>I premi saranno distribuiti ai primi tre classificati del torneo.</li> \t<li>Il vincitore riceverà un trofeo e un premio in denaro di €100.</li> \t<li>Il secondo e il terzo classificato riceveranno premi minori in beni o servizi.</li> </ul>`
 
 export function Admin(props: any) {
@@ -76,12 +29,13 @@ export function Admin(props: any) {
     // mode: 'uncontrolled',
     initialValues: {
       id: '',
+      winner: '',
       picflowId: '',
       name: '',
       date: '',
       description: '',
-      rounds: '',
-      rules: ''
+      challongeUrl: '',
+      rules: '',
     },
   })
 
@@ -250,8 +204,9 @@ export function Admin(props: any) {
                       id: value,
                       name: data.name,
                       date: data.date,
+                      winner: data.winner,
                       description: data.description,
-                      rounds: data.rounds,
+                      challongeUrl: data.challongeUrl,
                       rules: data.rules,
                       picflowId: data.picflowId
                     })
@@ -285,9 +240,9 @@ export function Admin(props: any) {
                 <TextInput
                   disabled={isLoading}
                   required
-                  label="Id gallery picflow (dall'embed)"
+                  label="Nome"
                   mb="md"
-                  {...formHandleTournament.getInputProps('picflowId')}
+                  {...formHandleTournament.getInputProps('name')}
                 />
 
               </SimpleGrid>
@@ -297,17 +252,37 @@ export function Admin(props: any) {
                 <TextInput
                   disabled={isLoading}
                   required
-                  label="Nome"
+                  label="Data"
                   mb="md"
-                  {...formHandleTournament.getInputProps('name')}
+                  {...formHandleTournament.getInputProps('date')}
                 />
 
                 <TextInput
                   disabled={isLoading}
                   required
-                  label="Data"
+                  label="Vincitore"
                   mb="md"
-                  {...formHandleTournament.getInputProps('date')}
+                  {...formHandleTournament.getInputProps('winner')}
+                />
+
+              </SimpleGrid>
+
+              <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                <TextInput
+                  disabled={isLoading || tournamentSelected}
+                  required
+                  label="Url Challonge (per iframe)"
+                  mb="md"
+                  {...formHandleTournament.getInputProps('challongeUrl')}
+                />
+
+                <TextInput
+                  disabled={isLoading}
+                  required
+                  label="Id gallery picflow (dall'embed)"
+                  mb="md"
+                  {...formHandleTournament.getInputProps('picflowId')}
                 />
 
               </SimpleGrid>
@@ -320,23 +295,6 @@ export function Admin(props: any) {
                 rows={4}
                 {...formHandleTournament.getInputProps('description')}
               />
-
-              <Textarea
-                disabled={isLoading}
-                required
-                label="Tabellone torneo (in json)"
-                mb="md"
-                rows={4}
-                {...formHandleTournament.getInputProps('rounds')}
-              />
-
-              <CopyButton value={roundsJsonExample}>
-                {({ copied, copy }) => (
-                  <Button mb="xl" size="xs" color={copied ? 'teal' : 'shGreen'} onClick={copy}>
-                    {copied ? 'Copiato' : 'Copia json di esempio'}
-                  </Button>
-                )}
-              </CopyButton>
 
               <Textarea
                 disabled={isLoading}

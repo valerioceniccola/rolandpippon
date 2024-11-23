@@ -41,3 +41,17 @@
 .linkLabel {
   margin-right: rem(5px);
 }
+
+.linksMobile {
+  a, button {
+    display: block;
+    width: 100%;
+    padding: var(--mantine-spacing-sm);
+    font-size: var(--mantine-font-size-md);
+  }
+}
+
+.subMenu {
+  background-color: var(--mantine-color-gray-8);
+  padding: var(--mantine-spacing-md);
+}
