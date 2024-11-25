@@ -27,7 +27,7 @@ const links = [
     ],
   },
   { link: '/ranking', label: 'Ranking' },
-  { link: '/about', label: "Albo d'oro" },
+  { link: '/players', label: "Tennisti" },
 ];
 
 export function Navbar() {

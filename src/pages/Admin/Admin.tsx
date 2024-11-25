@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ComboboxData,
   Container, CopyButton, Divider,
@@ -36,6 +37,15 @@ export function Admin(props: any) {
       description: '',
       challongeUrl: '',
       rules: '',
+    },
+  })
+  const formHandlePlayer = useForm({
+    initialValues: {
+      slug: '',
+      name: '',
+      description: '',
+      racket: '',
+      img: ''
     },
   })
 
@@ -107,6 +117,7 @@ export function Admin(props: any) {
         color: 'green'
       })
 
+      formHandleTournament.reset()
       setTournamentSelected(null)
 
     } catch (err) {
@@ -118,7 +129,6 @@ export function Admin(props: any) {
       })
     }
 
-    formHandleTournament.reset()
     setIsLoading(false)
   }
 
@@ -145,6 +155,8 @@ export function Admin(props: any) {
           color: 'green'
         })
 
+        formHandleTournament.reset()
+
       } else {
 
         notifications.show({
@@ -162,10 +174,54 @@ export function Admin(props: any) {
         color: 'red'
       })
     }
-
-    formHandleTournament.reset()
     setIsLoading(false)
   }
+
+  const addNewPlayer = async (values: any) => {
+    console.log('Aggiungo nuovo giocatore')
+    console.log(values)
+    setIsLoading(true)
+
+    try {
+
+      const playersRef = doc(db, 'players', values.slug)
+      const docSnapshot = await getDoc(playersRef)
+
+      if (!docSnapshot.exists()) {
+
+        // Non esiste un giocatore con questo id, procedo alla creazione
+        await setDoc(doc(db, 'players', values.slug), {
+          ...values
+        })
+
+        notifications.show({
+          title: 'Perfetto!',
+          message: "Giocatore aggiunto con successo",
+          color: 'green'
+        })
+
+        formHandlePlayer.reset()
+
+      } else {
+
+        notifications.show({
+          title: 'Attenzione',
+          message: "Esiste già un giocatore con questo slug!",
+          color: 'red'
+        })
+      }
+
+    } catch (err) {
+      console.log(err)
+      notifications.show({
+        title: 'Errore generico',
+        message: "Si è verificato un errore, controlla i log",
+        color: 'red'
+      })
+    }
+    setIsLoading(false)
+  }
+
 
   useEffect(() => {
     if (!props.currentUser) return
@@ -190,143 +246,221 @@ export function Admin(props: any) {
         props.currentUser ?
           <Container size="sm">
 
-            <Select
-              label="Modifica un torneo esistente"
-              data={selectDataTournaments}
-              allowDeselect={false}
-              onChange={async (value) => {
-                setTournamentSelected(value)
+            <Box mb="xl">
 
-                if (value) {
-                  const data = await getTournament(value)
-                  if (data) {
-                    formHandleTournament.setValues({
-                      id: value,
-                      name: data.name,
-                      date: data.date,
-                      winner: data.winner,
-                      description: data.description,
-                      challongeUrl: data.challongeUrl,
-                      rules: data.rules,
-                      picflowId: data.picflowId
-                    })
+              <Title order={1} mb="lg">Gestione tornei</Title>
+
+              <Select
+                label="Modifica un torneo esistente"
+                data={selectDataTournaments}
+                allowDeselect={false}
+                onChange={async (value) => {
+                  setTournamentSelected(value)
+
+                  if (value) {
+                    const data = await getTournament(value)
+                    if (data) {
+                      formHandleTournament.setValues({
+                        id: value,
+                        name: data.name,
+                        date: data.date,
+                        winner: data.winner,
+                        description: data.description,
+                        challongeUrl: data.challongeUrl,
+                        rules: data.rules,
+                        picflowId: data.picflowId
+                      })
+                    }
                   }
+                }}
+                mb="lg"
+              />
+
+              <Divider my="lg"/>
+
+              <form onSubmit={formHandleTournament.onSubmit((values) => {
+                if (tournamentSelected) {
+                  editTournament(values)
+                } else {
+                  addNewTournament(values)
                 }
-              }}
-              mb="lg"
-            />
+              })}>
+
+
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                  <TextInput
+                    disabled={isLoading || tournamentSelected}
+                    required
+                    label="Id torneo (numerico)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('id')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Nome"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('name')}
+                  />
+
+                </SimpleGrid>
+
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Data"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('date')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Vincitore (slug es: nome-cognome)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('winner')}
+                  />
+
+                </SimpleGrid>
+
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                  <TextInput
+                    disabled={isLoading || tournamentSelected}
+                    required
+                    label="Url Challonge (per iframe)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('challongeUrl')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Id gallery picflow (dall'embed)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('picflowId')}
+                  />
+
+                </SimpleGrid>
+
+                <Textarea
+                  disabled={isLoading}
+                  required
+                  label="Breve descrizione"
+                  mb="md"
+                  rows={4}
+                  {...formHandleTournament.getInputProps('description')}
+                />
+
+                <Textarea
+                  disabled={isLoading}
+                  required
+                  label="Regolamento (in html)"
+                  mb="md"
+                  rows={4}
+                  {...formHandleTournament.getInputProps('rules')}
+                />
+
+                <CopyButton value={htmlRulesExample}>
+                  {({ copied, copy }) => (
+                    <Button mb="md" size="xs" color={copied ? 'teal' : 'shGreen'} onClick={copy}>
+                      {copied ? 'Copiato' : 'Copia html di esempio'}
+                    </Button>
+                  )}
+                </CopyButton>
+
+                <Button
+                  type="submit"
+                  loading={isLoading}
+                  fullWidth
+                  mt="md"
+                  size="md"
+                  variant="gradient"
+                >
+                  {
+                    tournamentSelected ? 'Aggiorna torneo' : 'Inserisci nuovo torneo'
+                  }
+                </Button>
+
+              </form>
+
+            </Box>
 
             <Divider my="lg"/>
 
-            <form onSubmit={formHandleTournament.onSubmit((values) => {
-              if (tournamentSelected) {
-                editTournament(values)
-              } else {
-                addNewTournament(values)
-              }
-            })}>
+              <Box mb="xl">
 
+                <Title order={1} mb="lg">Aggiungi nuovo giocatore</Title>
 
-              <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                <form onSubmit={formHandlePlayer.onSubmit((values) => addNewPlayer(values))}>
 
-                <TextInput
-                  disabled={isLoading || tournamentSelected}
-                  required
-                  label="Id torneo (numerico)"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('id')}
-                />
+                  <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
-                <TextInput
-                  disabled={isLoading}
-                  required
-                  label="Nome"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('name')}
-                />
+                    <TextInput
+                      disabled={isLoading || tournamentSelected}
+                      required
+                      label="Slug (es: nome-cognome)"
+                      mb="md"
+                      {...formHandlePlayer.getInputProps('slug')}
+                    />
 
-              </SimpleGrid>
+                    <TextInput
+                      disabled={isLoading}
+                      required
+                      label="Nome e cognome"
+                      mb="md"
+                      {...formHandlePlayer.getInputProps('name')}
+                    />
 
-              <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                  </SimpleGrid>
 
-                <TextInput
-                  disabled={isLoading}
-                  required
-                  label="Data"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('date')}
-                />
+                  <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
-                <TextInput
-                  disabled={isLoading}
-                  required
-                  label="Vincitore"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('winner')}
-                />
+                    <TextInput
+                      disabled={isLoading}
+                      required
+                      label="Url avatar (da postimages)"
+                      mb="md"
+                      {...formHandlePlayer.getInputProps('img')}
+                    />
 
-              </SimpleGrid>
+                    <TextInput
+                      disabled={isLoading}
+                      required
+                      label="Racchetta"
+                      mb="md"
+                      {...formHandlePlayer.getInputProps('racket')}
+                    />
 
-              <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                  </SimpleGrid>
 
-                <TextInput
-                  disabled={isLoading || tournamentSelected}
-                  required
-                  label="Url Challonge (per iframe)"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('challongeUrl')}
-                />
+                  <Textarea
+                    disabled={isLoading}
+                    required
+                    label="Descrizione"
+                    mb="md"
+                    rows={4}
+                    {...formHandlePlayer.getInputProps('description')}
+                  />
 
-                <TextInput
-                  disabled={isLoading}
-                  required
-                  label="Id gallery picflow (dall'embed)"
-                  mb="md"
-                  {...formHandleTournament.getInputProps('picflowId')}
-                />
-
-              </SimpleGrid>
-
-              <Textarea
-                disabled={isLoading}
-                required
-                label="Breve descrizione"
-                mb="md"
-                rows={4}
-                {...formHandleTournament.getInputProps('description')}
-              />
-
-              <Textarea
-                disabled={isLoading}
-                required
-                label="Regolamento (in html)"
-                mb="md"
-                rows={4}
-                {...formHandleTournament.getInputProps('rules')}
-              />
-
-              <CopyButton value={htmlRulesExample}>
-                {({ copied, copy }) => (
-                  <Button mb="xl" size="xs" color={copied ? 'teal' : 'shGreen'} onClick={copy}>
-                    {copied ? 'Copiato' : 'Copia html di esempio'}
+                  <Button
+                    type="submit"
+                    loading={isLoading}
+                    fullWidth
+                    mt="md"
+                    size="md"
+                    variant="gradient"
+                  >
+                    Inserisci nuovo giocatore
                   </Button>
-                )}
-              </CopyButton>
 
-              <Button
-                type="submit"
-                loading={isLoading}
-                fullWidth
-                mt="md"
-                size="md"
-                variant="gradient"
-              >
-                {
-                  tournamentSelected ? 'Aggiorna torneo' : 'Inserisci nuovo torneo'
-                }
-              </Button>
+                </form>
 
-            </form>
+              </Box>
 
           </Container>
           :

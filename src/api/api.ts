@@ -8,6 +8,13 @@ export const getTournament = async(id: string) => {
   return tournamentData
 }
 
+export const getPlayer = async(slug: string) => {
+  const ref = doc(db, "players", slug)
+  const player = await getDoc(ref)
+  let playerData = player.data()
+  return playerData
+}
+
 export const getAllTournaments = async() => {
   const q = query(collection(db, "tournaments"))
   const res = await getDocs(q)
@@ -22,3 +29,4 @@ export const getAllTournaments = async() => {
 
   return tournaments
 }
+

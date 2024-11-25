@@ -16,6 +16,7 @@ import { useEffect, useState } from "react"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./api/api-firebase.ts"
 import { Dashboard } from "./pages/Dashboard/Dashboard.tsx"
+import { Player } from "./pages/Player/Player.tsx"
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route element={<LayoutDefault/>}>
           <Route path="/" element={<Dashboard/>}/>
           <Route path="/tournament/:id" element={<Tournament />}/>
+          <Route path="/players/:slug" element={<Player />}/>
           <Route path="/admin" element={<Admin currentUser={currentUser}/>}/>
           <Route path="/404" element={<NotFound/>}/>
           <Route path="*" element={<NotFound/>}/>

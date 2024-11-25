@@ -1,7 +1,7 @@
-import { Box, Center, Loader, Tabs, Text, Title, useMantineTheme } from "@mantine/core"
+import { Anchor, Box, Center, Loader, Tabs, Text, Title, useMantineTheme } from "@mantine/core"
 import { useEffect, useRef, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { getTournament } from "../../api/api.ts"
+import { NavLink, useNavigate, useParams } from "react-router-dom"
+import { getPlayer, getTournament } from "../../api/api.ts"
 
 
 export function Tournament() {
@@ -12,6 +12,7 @@ export function Tournament() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tournament, setTournament] = useState<any>(null)
+  const [winner, setWinner] = useState<any>(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -22,12 +23,16 @@ export function Tournament() {
       .then((data) => {
         if (data !== undefined) {
           setTournament(data)
+          getPlayer(data.winner)
+            .then((player) => {
+              setWinner(player)
+            })
+            .finally(() => {
+              setIsLoading(false)
+            })
         } else {
           navigate("/404")
         }
-      })
-      .finally(() => {
-        setIsLoading(false)
       })
 
   }, [params.id])
@@ -35,7 +40,7 @@ export function Tournament() {
   return (
     <>
       {
-        (!isLoading && tournament) ?
+        (!isLoading && tournament && winner) ?
           <Box mb="lg">
             <Title order={1} mb="xl">{tournament.name}</Title>
 
@@ -55,7 +60,10 @@ export function Tournament() {
 
               <Tabs.Panel value="info">
                 <Text mb="lg">{tournament.date}</Text>
-                <Text mb="lg">Vincitore torneo: {tournament.winner}</Text>
+                <Text mb="lg">
+                  🏆 Vincitore torneo:
+                  <Anchor ml="xs" component={NavLink} to={`/players/${tournament.winner}`}>{winner.name}</Anchor>
+                </Text>
                 <Text mb="lg">{tournament.description}</Text>
 
                 {
