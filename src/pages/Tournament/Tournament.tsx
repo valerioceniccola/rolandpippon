@@ -1,4 +1,16 @@
-import { Anchor, Box, Center, Loader, Tabs, Text, Title, useMantineTheme } from "@mantine/core"
+import {
+  Anchor,
+  Avatar, Badge,
+  Box,
+  Center,
+  Group,
+  Loader,
+  SimpleGrid,
+  Tabs,
+  Text,
+  Title,
+  useMantineTheme
+} from "@mantine/core"
 import { useEffect, useRef, useState } from "react"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
@@ -8,11 +20,12 @@ export function Tournament() {
 
   const params = useParams()
   const navigate = useNavigate()
-  const theme = useMantineTheme()
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tournament, setTournament] = useState<any>(null)
   const [winner, setWinner] = useState<any>(null)
+  const [winner2, setWinner2] = useState<any>(null)
+  const [winner3, setWinner3] = useState<any>(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -23,13 +36,33 @@ export function Tournament() {
       .then((data) => {
         if (data !== undefined) {
           setTournament(data)
+
           getPlayer(data.winner)
             .then((player) => {
-              setWinner(player)
+              setWinner({
+                data: player,
+                id: data.winner
+              })
             })
-            .finally(() => {
-              setIsLoading(false)
+
+          getPlayer(data.winner2)
+            .then((player) => {
+              setWinner2({
+                data: player,
+                id: data.winner2
+              })
             })
+
+          getPlayer(data.winner3)
+            .then((player) => {
+              setWinner3({
+                data: player,
+                id: data.winner3
+              })
+            })
+
+          setIsLoading(false)
+
         } else {
           navigate("/404")
         }
@@ -40,7 +73,7 @@ export function Tournament() {
   return (
     <>
       {
-        (!isLoading && tournament && winner) ?
+        (!isLoading && tournament && winner && winner2 && winner3) ?
           <Box mb="lg">
             <Title order={1} mb="xl">{tournament.name}</Title>
 
@@ -59,25 +92,42 @@ export function Tournament() {
               </Tabs.List>
 
               <Tabs.Panel value="info">
-                <Text mb="lg">{tournament.date}</Text>
-                <Text mb="lg">
-                  🏆 Vincitore torneo:
-                  <Anchor ml="xs" component={NavLink} to={`/players/${tournament.winner}`}>{winner.name}</Anchor>
-                </Text>
-                <Text mb="lg">{tournament.description}</Text>
 
-                {
-                  tournament.picflowId &&
-                  // Esempio id picflow: gal_4xrFVV48aamykpMu
-                  // @ts-ignore
-                  <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
-                }
+                <Box mb="lg" py="md">
+                  <SimpleGrid cols={3}>
+                    {
+                      // Ciclo 3 elementi
+                      [winner, winner2, winner3].map((player: any, index: number) => (
+                        <div key={index}>
+                          <Text tt="uppercase" size="sm" mb="sm">🏆 {index + 1}° Posto</Text>
+                          <Group gap="md">
+                            <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
+                            <Anchor component={NavLink} to={`/players/${player.id}`}>{player.data.name}</Anchor>
+                          </Group>
+                        </div>
+                      ))
+                    }
+                  </SimpleGrid>
+                </Box>
+
+                <Badge mb="xl">{tournament.date}</Badge>
+
+                <Box>
+                  <Text mb="lg">{tournament.description}</Text>
+                  {
+                    tournament.picflowId &&
+                    // Esempio id picflow: gal_4xrFVV48aamykpMu
+                    // @ts-ignore
+                    <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
+                  }
+                </Box>
+
               </Tabs.Panel>
 
               <Tabs.Panel value="results">
                 <iframe
                   src={`${tournament.challongeUrl}?multiplier=1.2`}
-                  style={{width: '100%', height: 1200, border: 0}}
+                  style={{ width: '100%', height: 1200, border: 0 }}
                 />
               </Tabs.Panel>
 

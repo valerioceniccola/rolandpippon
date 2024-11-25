@@ -31,6 +31,8 @@ export function Admin(props: any) {
     initialValues: {
       id: '',
       winner: '',
+      winner2:'',
+      winner3: '',
       picflowId: '',
       name: '',
       date: '',
@@ -39,6 +41,7 @@ export function Admin(props: any) {
       rules: '',
     },
   })
+
   const formHandlePlayer = useForm({
     initialValues: {
       slug: '',
@@ -265,6 +268,8 @@ export function Admin(props: any) {
                         name: data.name,
                         date: data.date,
                         winner: data.winner,
+                        winner2: data.winner2,
+                        winner3: data.winner3,
                         description: data.description,
                         challongeUrl: data.challongeUrl,
                         rules: data.rules,
@@ -323,6 +328,22 @@ export function Admin(props: any) {
                     label="Vincitore (slug es: nome-cognome)"
                     mb="md"
                     {...formHandleTournament.getInputProps('winner')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Secondo posto (slug es: nome-cognome)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('winner2')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Terzo posto (slug es: nome-cognome)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('winner3')}
                   />
 
                 </SimpleGrid>
