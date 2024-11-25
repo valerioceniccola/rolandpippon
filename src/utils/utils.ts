@@ -1,6 +1,3 @@
-import moment from "moment"
-
-
 export const getQs = (qs: string) => {
   const search = window.location.search
   const params = new URLSearchParams(search)
@@ -29,12 +26,15 @@ export const secondsToDate = (seconds: any) => {
   return new Date(seconds*1000)
 }
 
-export const getIsoDate = (date: Date) => {
-  return moment(date).toISOString()
+export const parseMonthYearToDate = (monthYearString: string) => {
+  const [month, year] = monthYearString.split("/").map(Number)
+  const fullYear = year < 100 ? year + 2000 : year
+  return new Date(fullYear, month - 1, 1)
 }
 
-export const getDateFromIso = (iso: string) => {
-  const dataMoment = moment(iso);
-  const dataJS = dataMoment.toDate();
-  return dataJS.getTime();
+export const getMonthYearFromFirebaseDatestamp = (datestamp: any) => {
+  const date = new Date(datestamp.seconds * 1000);
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString().slice(-2);
+  return `${month}/${year}`;
 }

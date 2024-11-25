@@ -2,7 +2,9 @@ import {
   Box,
   Button,
   ComboboxData,
-  Container, CopyButton, Divider,
+  Container,
+  CopyButton,
+  Divider,
   PasswordInput,
   Select,
   SimpleGrid,
@@ -16,7 +18,8 @@ import { notifications } from "@mantine/notifications"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth, db } from "../../api/api-firebase.ts"
 import { getAllTournaments, getTournament } from "../../api/api.ts"
-import { collection, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc } from "firebase/firestore"
+import { getMonthYearFromFirebaseDatestamp, parseMonthYearToDate } from "../../utils/utils.ts"
 
 const htmlRulesExample = `<h1>Regolamento del Torneo di Tennis Locale</h1>                      <h3>1. Iscrizioni e Partecipazione</h3> <ul> \t<li>Il torneo è aperto a tutti i giocatori di età pari o superiore ai 14 anni.</li> \t<li>Ogni partecipante deve presentare un certificato medico sportivo valido.</li> \t<li>La quota di iscrizione è di €20 e deve essere versata al momento della registrazione.</li> </ul>                      <h3>2. Struttura del Torneo</h3> <ul> \t<li>Il torneo si svolgerà in formato ad eliminazione diretta.</li> \t<li>Ogni incontro si disputerà al meglio dei 3 set, con tie-break sul 6-6.</li> \t<li> In caso di pioggia o condizioni meteorologiche avverse, gli incontri saranno rinviati o spostati al coperto, \t\tove possibile. \t</li> </ul>                      <h3>3. Regole di Gioco</h3> <ul> \t<li> Le partite seguiranno il regolamento ufficiale della Federazione Italiana Tennis (FIT).</li> \t<li>È obbligatorio indossare abbigliamento sportivo adeguato e scarpe da tennis.</li> \t<li> I giocatori devono presentarsi almeno 15 minuti prima dell'orario previsto per il loro incontro.</li> </ul>                      <h3>4. Arbitraggio e Comportamento</h3> <ul> \t<li> Le partite saranno autogestite dai giocatori, salvo le fasi finali che avranno un arbitro designato.</li> \t<li>Ogni disputa sarà risolta dal direttore del torneo, il cui giudizio sarà insindacabile.</li> \t<li> È richiesto un comportamento sportivo e rispettoso verso gli avversari e gli organizzatori.</li> </ul>                      <h3>5. Premi</h3> <ul> \t<li>I premi saranno distribuiti ai primi tre classificati del torneo.</li> \t<li>Il vincitore riceverà un trofeo e un premio in denaro di €100.</li> \t<li>Il secondo e il terzo classificato riceveranno premi minori in beni o servizi.</li> </ul>`
 
@@ -31,11 +34,12 @@ export function Admin(props: any) {
     initialValues: {
       id: '',
       winner: '',
-      winner2:'',
+      winner2: '',
       winner3: '',
       picflowId: '',
       name: '',
       date: '',
+      dateStart: '',
       description: '',
       challongeUrl: '',
       rules: '',
@@ -111,7 +115,8 @@ export function Admin(props: any) {
     try {
 
       await setDoc(doc(db, 'tournaments', values.id), {
-        ...values
+        ...values,
+        dateStart: parseMonthYearToDate(values.dateStart)
       })
 
       notifications.show({
@@ -149,7 +154,8 @@ export function Admin(props: any) {
 
         // Non esiste un torneo con questo id, procedo alla creazione
         await setDoc(doc(db, 'tournaments', values.id), {
-          ...values
+          ...values,
+          dateStart: parseMonthYearToDate(values.dateStart)
         })
 
         notifications.show({
@@ -225,7 +231,6 @@ export function Admin(props: any) {
     setIsLoading(false)
   }
 
-
   useEffect(() => {
     if (!props.currentUser) return
 
@@ -267,6 +272,7 @@ export function Admin(props: any) {
                         id: value,
                         name: data.name,
                         date: data.date,
+                        dateStart: getMonthYearFromFirebaseDatestamp(data.dateStart),
                         winner: data.winner,
                         winner2: data.winner2,
                         winner3: data.winner3,
@@ -317,10 +323,22 @@ export function Admin(props: any) {
                   <TextInput
                     disabled={isLoading}
                     required
-                    label="Data"
+                    label="Data (descrittiva)"
                     mb="md"
                     {...formHandleTournament.getInputProps('date')}
                   />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Data mese anno (es: 07/24)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('dateStart')}
+                  />
+
+                </SimpleGrid>
+
+                <SimpleGrid cols={{ base: 1, sm: 3 }}>
 
                   <TextInput
                     disabled={isLoading}
@@ -345,7 +363,6 @@ export function Admin(props: any) {
                     mb="md"
                     {...formHandleTournament.getInputProps('winner3')}
                   />
-
                 </SimpleGrid>
 
                 <SimpleGrid cols={{ base: 1, sm: 2 }}>
@@ -413,75 +430,75 @@ export function Admin(props: any) {
 
             <Divider my="lg"/>
 
-              <Box mb="xl">
+            <Box mb="xl">
 
-                <Title order={1} mb="lg">Aggiungi nuovo giocatore</Title>
+              <Title order={1} mb="lg">Aggiungi nuovo giocatore</Title>
 
-                <form onSubmit={formHandlePlayer.onSubmit((values) => addNewPlayer(values))}>
+              <form onSubmit={formHandlePlayer.onSubmit((values) => addNewPlayer(values))}>
 
-                  <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
-                    <TextInput
-                      disabled={isLoading || tournamentSelected}
-                      required
-                      label="Slug (es: nome-cognome)"
-                      mb="md"
-                      {...formHandlePlayer.getInputProps('slug')}
-                    />
-
-                    <TextInput
-                      disabled={isLoading}
-                      required
-                      label="Nome e cognome"
-                      mb="md"
-                      {...formHandlePlayer.getInputProps('name')}
-                    />
-
-                  </SimpleGrid>
-
-                  <SimpleGrid cols={{ base: 1, sm: 2 }}>
-
-                    <TextInput
-                      disabled={isLoading}
-                      required
-                      label="Url avatar (da postimages)"
-                      mb="md"
-                      {...formHandlePlayer.getInputProps('img')}
-                    />
-
-                    <TextInput
-                      disabled={isLoading}
-                      required
-                      label="Racchetta"
-                      mb="md"
-                      {...formHandlePlayer.getInputProps('racket')}
-                    />
-
-                  </SimpleGrid>
-
-                  <Textarea
-                    disabled={isLoading}
+                  <TextInput
+                    disabled={isLoading || tournamentSelected}
                     required
-                    label="Descrizione"
+                    label="Slug (es: nome-cognome)"
                     mb="md"
-                    rows={4}
-                    {...formHandlePlayer.getInputProps('description')}
+                    {...formHandlePlayer.getInputProps('slug')}
                   />
 
-                  <Button
-                    type="submit"
-                    loading={isLoading}
-                    fullWidth
-                    mt="md"
-                    size="md"
-                    variant="gradient"
-                  >
-                    Inserisci nuovo giocatore
-                  </Button>
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Nome e cognome"
+                    mb="md"
+                    {...formHandlePlayer.getInputProps('name')}
+                  />
 
-                </form>
+                </SimpleGrid>
 
-              </Box>
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Url avatar (da postimages)"
+                    mb="md"
+                    {...formHandlePlayer.getInputProps('img')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Racchetta"
+                    mb="md"
+                    {...formHandlePlayer.getInputProps('racket')}
+                  />
+
+                </SimpleGrid>
+
+                <Textarea
+                  disabled={isLoading}
+                  required
+                  label="Descrizione"
+                  mb="md"
+                  rows={4}
+                  {...formHandlePlayer.getInputProps('description')}
+                />
+
+                <Button
+                  type="submit"
+                  loading={isLoading}
+                  fullWidth
+                  mt="md"
+                  size="md"
+                  variant="gradient"
+                >
+                  Inserisci nuovo giocatore
+                </Button>
+
+              </form>
+
+            </Box>
 
           </Container>
           :

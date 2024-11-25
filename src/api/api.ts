@@ -15,8 +15,14 @@ export const getPlayer = async(slug: string) => {
   return playerData
 }
 
-export const getAllTournaments = async() => {
-  const q = query(collection(db, "tournaments"))
+export const getAllTournaments = async(options?: {orderByDate?: boolean}) => {
+
+  const q =
+    (options?.orderByDate) ?
+      query(collection(db, "tournaments"), orderBy("dateStart", "desc"))
+      :
+      query(collection(db, "tournaments"))
+
   const res = await getDocs(q)
 
   const tournaments = res.docs.map((doc) => {
@@ -29,4 +35,3 @@ export const getAllTournaments = async() => {
 
   return tournaments
 }
-

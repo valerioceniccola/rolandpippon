@@ -80,15 +80,9 @@ export function Tournament() {
             <Tabs color="green" defaultValue="info">
 
               <Tabs.List mb="lg">
-                <Tabs.Tab value="info">
-                  Informazioni
-                </Tabs.Tab>
-                <Tabs.Tab value="results">
-                  Risultati
-                </Tabs.Tab>
-                <Tabs.Tab value="rules">
-                  Regolamento
-                </Tabs.Tab>
+                <Tabs.Tab value="info">Informazioni</Tabs.Tab>
+                <Tabs.Tab value="results">Risultati</Tabs.Tab>
+                <Tabs.Tab value="rules">Regolamento</Tabs.Tab>
               </Tabs.List>
 
               <Tabs.Panel value="info">
