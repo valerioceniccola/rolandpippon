@@ -18,7 +18,7 @@ import { auth } from "./api/api-firebase.ts"
 import { Dashboard } from "./pages/Dashboard/Dashboard.tsx"
 import { Player } from "./pages/Player/Player.tsx"
 
-function App() {
+const App = () => {
 
   const [currentUser, setCurrentUser] = useState<any>(null)
 

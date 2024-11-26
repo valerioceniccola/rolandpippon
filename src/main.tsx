@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { StrictMode } from 'react'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter
       future={{
         v7_startTransition: true,
@@ -13,5 +13,5 @@ createRoot(document.getElementById('root')!).render(
     >
       <App/>
     </BrowserRouter>
-  </StrictMode>,
+  // </StrictMode>,
 )

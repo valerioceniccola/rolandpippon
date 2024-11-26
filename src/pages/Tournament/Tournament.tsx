@@ -1,17 +1,5 @@
-import {
-  Anchor,
-  Avatar, Badge,
-  Box,
-  Center,
-  Group,
-  Loader,
-  SimpleGrid,
-  Tabs,
-  Text,
-  Title,
-  useMantineTheme
-} from "@mantine/core"
-import { useEffect, useRef, useState } from "react"
+import { Anchor, Avatar, Badge, Box, Center, Group, Loader, SimpleGrid, Tabs, Text, Title } from "@mantine/core"
+import { useEffect, useState } from "react"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
 
@@ -26,6 +14,14 @@ export function Tournament() {
   const [winner, setWinner] = useState<any>(null)
   const [winner2, setWinner2] = useState<any>(null)
   const [winner3, setWinner3] = useState<any>(null)
+
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://picflow.com/embed/main.js"
+    script.defer = true
+    script.type = 'module'
+    document.head.appendChild(script)
+  }, []);
 
   useEffect(() => {
     setIsLoading(true)
