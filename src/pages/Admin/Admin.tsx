@@ -532,8 +532,6 @@ export function Admin(props: any) {
             </form>
           </Container>
       }
-
-
     </>
   )
 
