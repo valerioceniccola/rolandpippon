@@ -7,3 +7,8 @@
     border-bottom: rem(1px) solid var(--mantine-color-gray-1);
   }
 }
+
+.gallery {
+  border-radius: 6px;
+  border: rem(1px) solid var(--mantine-color-dark-5);
+}

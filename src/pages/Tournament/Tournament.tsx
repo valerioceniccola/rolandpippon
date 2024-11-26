@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
 import { Helmet } from "react-helmet"
+import classes from "./Tournament.module.css"
 
 
 export function Tournament() {
@@ -75,6 +76,14 @@ export function Tournament() {
       {
         (!isLoading && tournament && winner && winner2 && winner3) ?
           <Box mb="lg">
+
+            {
+              tournament.live ?
+                <Badge size="lg" mb="lg" color="red">Live</Badge>
+                :
+                <Badge size="lg" mb="lg">{tournament.date}</Badge>
+            }
+
             <Title order={1} mb="xl">{tournament.name}</Title>
 
             <Tabs color="green" defaultValue="info">
@@ -89,37 +98,34 @@ export function Tournament() {
 
                 <Box mb="lg" py="md">
                   <Paper withBorder p="lg" bg="var(--mantine-color-dark-8)">
-                  <SimpleGrid cols={3}>
-                    {
-                      // Ciclo 3 elementi
-                      [winner, winner2, winner3].map((player: any, index: number) => (
-                        <div key={index}>
-                          <Text tt="uppercase" size="sm" mb="sm">🏆 {index + 1}° Posto</Text>
-                          <Group gap="md">
-                            <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
-                            <Anchor component={NavLink} to={`/players/${player.id}`}>{player.data.name}</Anchor>
-                          </Group>
-                        </div>
-                      ))
-                    }
-                  </SimpleGrid>
+                    <SimpleGrid cols={3}>
+                      {
+                        // Ciclo 3 elementi
+                        [winner, winner2, winner3].map((player: any, index: number) => (
+                          <div key={index}>
+                            <Text tt="uppercase" size="sm" mb="sm">🏆 {index + 1}° Posto</Text>
+                            <Group gap="md">
+                              <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
+                              <Anchor component={NavLink} to={`/players/${player.id}`}>{player.data.name}</Anchor>
+                            </Group>
+                          </div>
+                        ))
+                      }
+                    </SimpleGrid>
                   </Paper>
                 </Box>
-
-                {
-                  tournament.live &&
-                    <Badge mb="xl" mr="md" color="red">Live</Badge>
-                }
-
-                <Badge mb="xl">{tournament.date}</Badge>
 
                 <Box>
                   <Text mb="lg">{tournament.description}</Text>
                   {
                     tournament.picflowId &&
-                    // Esempio id picflow: gal_4xrFVV48aamykpMu
-                    // @ts-ignore
-                    <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
+                    <Box bg="var(--mantine-color-dark-8)" className={classes.gallery}>
+                      {
+                        // Esempio id picflow: gal_4xrFVV48aamykpMu
+                        // @ts-ignore
+                        <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
+                      }
+                    </Box>
                   }
                 </Box>
 
