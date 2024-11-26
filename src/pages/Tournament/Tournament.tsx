@@ -106,6 +106,11 @@ export function Tournament() {
                   </Paper>
                 </Box>
 
+                {
+                  tournament.live &&
+                    <Badge mb="xl" mr="md" color="red">Live</Badge>
+                }
+
                 <Badge mb="xl">{tournament.date}</Badge>
 
                 <Box>
