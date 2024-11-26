@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  Button, Checkbox,
   ComboboxData,
   Container,
   CopyButton,
@@ -33,6 +33,7 @@ export function Admin(props: any) {
     // mode: 'uncontrolled',
     initialValues: {
       id: '',
+      live: false,
       winner: '',
       winner2: '',
       winner3: '',
@@ -271,6 +272,7 @@ export function Admin(props: any) {
                     if (data) {
                       formHandleTournament.setValues({
                         id: value,
+                        live: data.live,
                         name: data.name,
                         date: data.date,
                         dateStart: getMonthYearFromFirebaseDatestamp(data.dateStart),
@@ -298,8 +300,7 @@ export function Admin(props: any) {
                 }
               })}>
 
-
-                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                <SimpleGrid cols={{ base: 1, sm: 3 }}>
 
                   <TextInput
                     disabled={isLoading || tournamentSelected}
@@ -315,6 +316,13 @@ export function Admin(props: any) {
                     label="Nome"
                     mb="md"
                     {...formHandleTournament.getInputProps('name')}
+                  />
+
+                  <Checkbox
+                    disabled={isLoading}
+                    label="Live"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('live', {type: 'checkbox'})}
                   />
 
                 </SimpleGrid>

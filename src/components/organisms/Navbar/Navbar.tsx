@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom"
 
 const links = [
   {
-    link: '#',
+    link: '/',
     label: 'Tornei',
     links: [
       { link: '/tournament/1', label: 'Prima edizione' },

@@ -1,0 +1,19 @@
+.card {
+  cursor: pointer;
+  background-color: var(--mantine-color-dark-8);
+  &:hover {
+    /*background-color: var(--mantine-color-dark-9);*/
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+  border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.title {
+  font-family: Greycliff CF, var(--mantine-font-family);
+  line-height: 1;
+}

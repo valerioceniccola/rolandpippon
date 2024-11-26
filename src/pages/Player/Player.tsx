@@ -62,7 +62,7 @@ export function Player() {
                 <Text tt="uppercase" size="xs">Racchetta</Text>
                 <Title order={3} mb="md">{player.racket}</Title>
               </div>
-              <Paper shadow="md" radius="lg" withBorder p="xl">
+              <Paper shadow="xs" radius="lg" withBorder p="xl" bg="var(--mantine-color-dark-8)">
                 {player.description}
               </Paper>
             </div>

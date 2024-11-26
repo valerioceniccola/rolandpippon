@@ -1,7 +1,8 @@
-import { Anchor, Avatar, Badge, Box, Center, Group, Loader, SimpleGrid, Tabs, Text, Title } from "@mantine/core"
+import { Anchor, Avatar, Badge, Box, Center, Group, Loader, Paper, SimpleGrid, Tabs, Text, Title } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
+import { Helmet } from "react-helmet"
 
 
 export function Tournament() {
@@ -68,6 +69,9 @@ export function Tournament() {
 
   return (
     <>
+      <Helmet>
+        <title>Tornei</title>
+      </Helmet>
       {
         (!isLoading && tournament && winner && winner2 && winner3) ?
           <Box mb="lg">
@@ -84,6 +88,7 @@ export function Tournament() {
               <Tabs.Panel value="info">
 
                 <Box mb="lg" py="md">
+                  <Paper withBorder p="lg" bg="var(--mantine-color-dark-8)">
                   <SimpleGrid cols={3}>
                     {
                       // Ciclo 3 elementi
@@ -98,6 +103,7 @@ export function Tournament() {
                       ))
                     }
                   </SimpleGrid>
+                  </Paper>
                 </Box>
 
                 <Badge mb="xl">{tournament.date}</Badge>

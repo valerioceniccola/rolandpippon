@@ -14,6 +14,7 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getAllPlayers, getPlayer, getTournament } from "../../api/api.ts"
+import { Helmet } from "react-helmet"
 
 
 export function Players() {
@@ -40,6 +41,9 @@ export function Players() {
 
   return (
     <>
+      <Helmet>
+        <title>Tennisti</title>
+      </Helmet>
       {
         (!isLoading && players) ?
           <Container size="sm">
@@ -47,7 +51,7 @@ export function Players() {
             <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
               {
                 players.map((player: any) => (
-                  <Paper key={player.data.name} withBorder p="lg" bg="var(--mantine-color-body)">
+                  <Paper key={player.data.name} withBorder p="lg" bg="var(--mantine-color-dark-8)">
                     <Avatar
                       src={player.data.img}
                       size={120}

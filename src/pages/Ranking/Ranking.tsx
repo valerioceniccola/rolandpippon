@@ -1,6 +1,7 @@
 import { Center, Container, Loader, Table } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getAllPlayers } from "../../api/api.ts"
+import { Helmet } from "react-helmet"
 
 export function Ranking() {
 
@@ -24,6 +25,9 @@ export function Ranking() {
 
   return (
     <>
+      <Helmet>
+        <title>Ranking</title>
+      </Helmet>
       {
         (!isLoading && players) ?
           <Container size="sm">
