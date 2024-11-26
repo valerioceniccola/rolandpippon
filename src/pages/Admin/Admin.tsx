@@ -52,7 +52,8 @@ export function Admin(props: any) {
       name: '',
       description: '',
       racket: '',
-      img: ''
+      img: '',
+      ranking: 0
     },
   })
 
@@ -456,7 +457,7 @@ export function Admin(props: any) {
 
                 </SimpleGrid>
 
-                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+                <SimpleGrid cols={{ base: 1, sm: 3 }}>
 
                   <TextInput
                     disabled={isLoading}
@@ -472,6 +473,14 @@ export function Admin(props: any) {
                     label="Racchetta"
                     mb="md"
                     {...formHandlePlayer.getInputProps('racket')}
+                  />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Ranking"
+                    mb="md"
+                    {...formHandlePlayer.getInputProps('ranking')}
                   />
 
                 </SimpleGrid>

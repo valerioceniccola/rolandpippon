@@ -1,21 +1,21 @@
 import { collection, getDocs, getDoc, query, orderBy, limit, where, doc } from "firebase/firestore"
 import { db } from "./api-firebase.ts"
 
-export const getTournament = async(id: string) => {
+export const getTournament = async (id: string) => {
   const ref = doc(db, "tournaments", id)
   const tournament = await getDoc(ref)
   let tournamentData = tournament.data()
   return tournamentData
 }
 
-export const getPlayer = async(slug: string) => {
+export const getPlayer = async (slug: string) => {
   const ref = doc(db, "players", slug)
   const player = await getDoc(ref)
   let playerData = player.data()
   return playerData
 }
 
-export const getAllTournaments = async(options?: {orderByDate?: boolean}) => {
+export const getAllTournaments = async (options?: { orderByDate?: boolean }) => {
 
   const q =
     (options?.orderByDate) ?
@@ -34,4 +34,21 @@ export const getAllTournaments = async(options?: {orderByDate?: boolean}) => {
   })
 
   return tournaments
+}
+
+export const getAllPlayers = async () => {
+
+  const q = query(collection(db, "players"))
+
+  const res = await getDocs(q)
+
+  const players = res.docs.map((doc) => {
+    const playersData = {
+      id: doc.id,
+      data: doc.data()
+    }
+    return playersData
+  })
+
+  return players
 }
