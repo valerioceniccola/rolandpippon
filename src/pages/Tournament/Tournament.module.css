@@ -21,3 +21,8 @@
   border-radius: rem(6px);
   overflow: hidden;
 }
+
+.winners {
+  background: var(--mantine-color-yellow-0);
+  border: rem(3px) solid var(--mantine-color-yellow-3);
+}

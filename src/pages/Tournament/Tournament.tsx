@@ -97,7 +97,7 @@ export function Tournament() {
               <Tabs.Panel value="info">
 
                 <Box mb="lg" py="md">
-                  <Paper withBorder p="lg" style={{borderWidth: 4}}>
+                  <Paper p="lg" className={classes.winners}>
                     <SimpleGrid cols={3}>
                       {
                         // Ciclo 3 elementi
@@ -119,11 +119,14 @@ export function Tournament() {
                   </Paper>
                 </Box>
 
+                <Box mb="xl">
+                  <Text>{tournament.description}</Text>
+                </Box>
+
                 <Box>
-                  <Text mb="lg">{tournament.description}</Text>
                   {
                     tournament.picflowId &&
-                    <Paper bg="var(--mantine-color-gray-1)" className={classes.gallery}>
+                    <Paper className={classes.gallery}>
                       {
                         // Esempio id picflow: gal_4xrFVV48aamykpMu
                         // @ts-ignore

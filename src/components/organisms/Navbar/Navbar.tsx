@@ -18,12 +18,18 @@ import { NavLink } from "react-router-dom"
 const links = [
   {
     link: '/',
-    label: 'Tornei',
+    label: 'Singolari',
     links: [
       { link: '/tournament/1', label: 'Prima edizione' },
       { link: '/tournament/2', label: 'Seconda edizione' },
-      { link: '/tournament/3', label: 'Terza edizione' },
-      { link: '/tournament/4', label: 'Finals 2024' },
+      { link: '/tournament/3', label: 'Finals 2024' },
+    ],
+  },
+  {
+    link: '/',
+    label: 'Doppi',
+    links: [
+      { link: '/tournament/1', label: 'Coppa Davis' },
     ],
   },
   { link: '/ranking', label: 'Ranking' },
