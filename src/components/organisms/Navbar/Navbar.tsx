@@ -29,7 +29,7 @@ const links = [
     link: '/',
     label: 'Doppi',
     links: [
-      { link: '/tournament/1', label: 'Coppa Davis' },
+      { link: '/tournament/4', label: 'Coppa Davis' },
     ],
   },
   { link: '/ranking', label: 'Ranking' },

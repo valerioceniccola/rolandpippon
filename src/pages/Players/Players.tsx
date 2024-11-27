@@ -55,7 +55,6 @@ export function Players() {
                     key={player.data.name}
                     withBorder
                     p="lg"
-                    bg="var(--mantine-color-gray-1)"
                     onClick={() => navigate(`/players/${player.id}`)}
                     style={{cursor: 'pointer'}}
                   >
