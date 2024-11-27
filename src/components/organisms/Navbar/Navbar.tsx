@@ -78,14 +78,17 @@ export function Navbar() {
 
   return (
     <Box className={classes.wrap}>
+
       <NavLink to="/">
         <Image
           src="/logo.svg"
           fit="contain"
           h={140}
-          py={20}
+          pt={20}
+          pb={10}
         />
       </NavLink>
+
       <header className={classes.header}>
 
         {/*<Container size="md">*/}
