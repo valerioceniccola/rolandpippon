@@ -1,8 +1,8 @@
 .card {
   cursor: pointer;
-  background-color: var(--mantine-color-dark-8);
+  /*background-color: var(--mantine-color-gray-1);*/
   &:hover {
-    /*background-color: var(--mantine-color-dark-9);*/
+    /*background-color: var(--mantine-color-gray-0);*/
   }
 }
 
@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
-  border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  border-top: 1px solid var(--mantine-color-gray-3);
 }
 
 .title {

@@ -28,7 +28,7 @@ export const CardTournament = ({ id, name, date, description, live }: Props) => 
             <Badge size="lg" mb="lg" color="red" style={{cursor: 'pointer'}}>Live</Badge>
         }
 
-        <Title order={3} fw={700} className={classes.title}>
+        <Title order={3} className={classes.title}>
           {name}
         </Title>
         <Text mt="sm" mb="md" c="dimmed" size="sm">

@@ -6,10 +6,12 @@ import { Footer } from "../../components/organisms/Footer/Footer.tsx"
 export function LayoutDefault() {
 
   return (
-    <Container size="md">
+    <>
       <Navbar/>
-      <Outlet/>
-      <Footer />
-    </Container>
+      <Container size="md">
+        <Outlet/>
+        <Footer/>
+      </Container>
+    </>
   )
 }

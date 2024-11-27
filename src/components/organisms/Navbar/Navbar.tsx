@@ -9,7 +9,7 @@ import {
   Drawer,
   ScrollArea,
   Divider,
-  UnstyledButton, Box, Collapse
+  UnstyledButton, Box, Collapse, Title
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './Navbar.module.css';
@@ -57,9 +57,7 @@ export function Navbar() {
               to={link.link}
               className={classes.link}
             >
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-              </Center>
+              <Title tt="uppercase" order={5}>{link.label}</Title>
             </NavLink>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
@@ -73,13 +71,13 @@ export function Navbar() {
         to={link.link}
         className={classes.link}
       >
-        {link.label}
+        <Title tt="uppercase" order={5}>{link.label}</Title>
       </NavLink>
     );
   });
 
   return (
-    <>
+    <Box className={classes.wrap}>
       <NavLink to="/">
         <Image
           src="/logo.svg"
@@ -90,14 +88,14 @@ export function Navbar() {
       </NavLink>
       <header className={classes.header}>
 
-        <Container size="md">
+        {/*<Container size="md">*/}
           <div className={classes.inner}>
             <Group gap={5} visibleFrom="sm">
               {items}
             </Group>
             <Burger opened={drawerOpened} onClick={toggleDrawer} size="sm" hiddenFrom="sm"/>
           </div>
-        </Container>
+        {/*</Container>*/}
 
         <Drawer
           opened={drawerOpened}
@@ -156,6 +154,6 @@ export function Navbar() {
           </ScrollArea>
         </Drawer>
       </header>
-    </>
+    </Box>
   );
 }

@@ -9,6 +9,15 @@
 }
 
 .gallery {
-  border-radius: 6px;
-  border: rem(1px) solid var(--mantine-color-dark-5);
+  overflow: hidden;
+  border: rem(1px) solid var(--mantine-color-gray-3);
+}
+
+.tournament {
+  overflow: hidden;
+  border: rem(1px) solid var(--mantine-color-gray-3);
+}
+.tournamentInner {
+  border-radius: rem(6px);
+  overflow: hidden;
 }

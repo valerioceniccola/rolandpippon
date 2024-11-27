@@ -23,7 +23,7 @@ export function Tournament() {
     script.defer = true
     script.type = 'module'
     document.head.appendChild(script)
-  }, []);
+  }, [])
 
   useEffect(() => {
     setIsLoading(true)
@@ -84,7 +84,7 @@ export function Tournament() {
                 <Badge size="lg" mb="lg">{tournament.date}</Badge>
             }
 
-            <Title order={1} mb="xl">{tournament.name}</Title>
+            <Title tt="uppercase" order={1} mb="xl">{tournament.name}</Title>
 
             <Tabs color="green" defaultValue="info">
 
@@ -97,13 +97,17 @@ export function Tournament() {
               <Tabs.Panel value="info">
 
                 <Box mb="lg" py="md">
-                  <Paper withBorder p="lg" bg="var(--mantine-color-dark-8)">
+                  <Paper withBorder p="lg" style={{borderWidth: 4}}>
                     <SimpleGrid cols={3}>
                       {
                         // Ciclo 3 elementi
                         [winner, winner2, winner3].map((player: any, index: number) => (
                           <div key={index}>
-                            <Text tt="uppercase" size="sm" mb="sm">🏆 {index + 1}° Posto</Text>
+                            <Title order={5} tt="uppercase" mb="sm">
+                              <Group justify="flex-start">
+                                <div>🏆</div> {index + 1}° Posto
+                              </Group>
+                            </Title>
                             <Group gap="md">
                               <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
                               <Anchor component={NavLink} to={`/players/${player.id}`}>{player.data.name}</Anchor>
@@ -119,23 +123,27 @@ export function Tournament() {
                   <Text mb="lg">{tournament.description}</Text>
                   {
                     tournament.picflowId &&
-                    <Box bg="var(--mantine-color-dark-8)" className={classes.gallery}>
+                    <Paper bg="var(--mantine-color-gray-1)" className={classes.gallery}>
                       {
                         // Esempio id picflow: gal_4xrFVV48aamykpMu
                         // @ts-ignore
                         <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
                       }
-                    </Box>
+                    </Paper>
                   }
                 </Box>
 
               </Tabs.Panel>
 
               <Tabs.Panel value="results">
-                <iframe
-                  src={`${tournament.challongeUrl}?multiplier=1.2`}
-                  style={{ width: '100%', height: 1200, border: 0 }}
-                />
+                <Paper p="lg" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
+                  <div className={classes.tournamentInner}>
+                    <iframe
+                      src={`${tournament.challongeUrl}?multiplier=1.2`}
+                      style={{ width: '100%', height: 1200, border: 0 }}
+                    />
+                  </div>
+                </Paper>
               </Tabs.Panel>
 
               <Tabs.Panel value="rules">

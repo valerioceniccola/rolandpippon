@@ -1,20 +1,21 @@
-import { createTheme } from "@mantine/core";
+import { createTheme } from "@mantine/core"
 
 export const theme = createTheme({
-  fontFamily: 'Open-Sans, sans-serif',
+  fontFamily: '"Open Sans", sans-serif',
+  headings: { fontFamily: '"Francois One", sans-serif' },
   defaultRadius: "md",
   colors: {
     shGreen: [
-      "#ecfef7",
-      "#d9faee",
-      "#acf7da",
-      "#7ef3c5",
-      "#5cf0b4",
-      "#49eea9",
-      "#3eeda3",
-      "#32d38e",
-      "#26bb7d",
-      "#0ba26a"
+      "#f0faf5",
+      "#e1f2e9",
+      "#bce4d0",
+      "#95d6b5",
+      "#75ca9e",
+      "#61c390",
+      "#55c088",
+      "#46a975",
+      "#3b9667",
+      "#2b8257"
     ]
   },
   defaultGradient: {

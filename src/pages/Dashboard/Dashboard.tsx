@@ -24,7 +24,7 @@ export function Dashboard() {
 
   return (
     <>
-      <Title order={1} mb="xl">Lista dei tornei</Title>
+      <Title order={2} mb="xl" tt="uppercase">Lista dei tornei</Title>
       {
         (!isLoading && tournaments) ?
           <>

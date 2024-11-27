@@ -53,16 +53,18 @@ export function Player() {
               <Avatar
                 src={player.img}
                 alt={player.name}
-                size="xl"
                 mb="sm"
                 style={{ display: 'inline-block', border: '3px solid #fff' }}
+                h={160}
+                w={160}
               />
-              <Title order={1} mb="lg">{player.name}</Title>
+              <Title order={1} tt="uppercase" mb="lg">{player.name}</Title>
+              <Divider mb="lg" />
               <div>
                 <Text tt="uppercase" size="xs">Racchetta</Text>
                 <Title order={3} mb="md">{player.racket}</Title>
               </div>
-              <Paper shadow="xs" radius="lg" withBorder p="xl" bg="var(--mantine-color-dark-8)">
+              <Paper radius="lg" withBorder p="xl" bg="var(--mantine-color-gray-1)">
                 {player.description}
               </Paper>
             </div>

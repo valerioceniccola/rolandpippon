@@ -36,7 +36,7 @@ const App = () => {
   return (
     <MantineProvider
       theme={theme}
-      defaultColorScheme="dark"
+      defaultColorScheme="light"
     >
       <Helmet
         titleTemplate={`%s | ${projectName}`}

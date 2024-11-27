@@ -46,12 +46,19 @@ export function Players() {
       </Helmet>
       {
         (!isLoading && players) ?
-          <Container size="sm">
+          <Container size="md">
 
             <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
               {
                 players.map((player: any) => (
-                  <Paper key={player.data.name} withBorder p="lg" bg="var(--mantine-color-dark-8)">
+                  <Paper
+                    key={player.data.name}
+                    withBorder
+                    p="lg"
+                    bg="var(--mantine-color-gray-1)"
+                    onClick={() => navigate(`/players/${player.id}`)}
+                    style={{cursor: 'pointer'}}
+                  >
                     <Avatar
                       src={player.data.img}
                       size={120}
@@ -59,15 +66,14 @@ export function Players() {
                       mx="auto"
                       alt={player.data.name}
                     />
-                    <Text ta="center" fz="lg" fw={500} mt="md">
+                    <Title order={5} tt="uppercase" ta="center" fz="lg" fw={500} mt="md">
                       {player.data.name}
-                    </Text>
-                    <Text ta="center" c="dimmed" fz="sm">
+                    </Title>
+                    <Text ta="center" c="dimmed" fz="xs">
                       {player.data.racket}
                     </Text>
 
                     <Button
-                      variant="default"
                       fullWidth
                       mt="md"
                       onClick={() => navigate(`/players/${player.id}`)}
