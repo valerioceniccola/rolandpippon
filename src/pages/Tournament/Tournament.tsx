@@ -136,7 +136,7 @@ export function Tournament() {
               </Tabs.Panel>
 
               <Tabs.Panel value="results">
-                <Paper p="lg" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
+                <Paper p="xs" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
                   <div className={classes.tournamentInner}>
                     <iframe
                       src={`${tournament.challongeUrl}?multiplier=1.2`}
