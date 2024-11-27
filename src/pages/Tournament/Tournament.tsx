@@ -139,7 +139,7 @@ export function Tournament() {
                 <Paper p="xs" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
                   <div className={classes.tournamentInner}>
                     <iframe
-                      src={`${tournament.challongeUrl}?multiplier=1.2`}
+                      src={`${tournament.challongeUrl}?multiplier=1`}
                       style={{ width: '100%', height: 1200, border: 0 }}
                     />
                   </div>
