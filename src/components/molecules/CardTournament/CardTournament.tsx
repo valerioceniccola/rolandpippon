@@ -47,7 +47,6 @@ export const CardTournament = ({ id, name, date, description, live }: Props) => 
           <div>
             <Button
               size="xs"
-              variant="outline"
             >
               Vedi dettagli
             </Button>

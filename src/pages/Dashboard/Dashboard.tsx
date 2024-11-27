@@ -24,7 +24,7 @@ export function Dashboard() {
 
   return (
     <>
-      <Title order={2} mb="xl" tt="uppercase">Lista dei tornei</Title>
+      <Title order={2} mb="xl" tt="uppercase">Tutti i tornei</Title>
       {
         (!isLoading && tournaments) ?
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
