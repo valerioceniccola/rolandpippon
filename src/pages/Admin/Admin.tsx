@@ -448,7 +448,7 @@ export function Admin(props: any) {
                 <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
-                    disabled={isLoading || tournamentSelected}
+                    disabled={isLoading}
                     required
                     label="Slug (es: nome-cognome)"
                     mb="md"
