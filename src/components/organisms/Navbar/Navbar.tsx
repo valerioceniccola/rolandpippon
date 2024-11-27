@@ -82,7 +82,7 @@ export function Navbar() {
         <Image
           src="/logo.svg"
           fit="contain"
-          h={180}
+          h={140}
           py={20}
         />
       </NavLink>
