@@ -37,9 +37,22 @@
   display: block;
 }
 
+.dropdown {
+  padding: 0;
+}
+
+.dropdown .dropdownItem {
+  padding: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  &:last-child {border-bottom: 0;}
+}
+
 .subLink {
   display: block;
   text-decoration: none;
+  padding: 10px 20px;
+  /*background: red;*/
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
 }
 
@@ -58,5 +71,5 @@
 
 .subMenu {
   background-color: var(--mantine-color-gray-3);
-  padding: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-xs);
 }

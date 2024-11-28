@@ -35,15 +35,17 @@ export function Ranking() {
             <Table stickyHeader stickyHeaderOffset={60} verticalSpacing="lg">
               <Table.Thead>
                 <Table.Tr>
+                  <Table.Th w={50}>Pos</Table.Th>
                   <Table.Th>Nome</Table.Th>
-                  <Table.Th>Ranking</Table.Th>
+                  <Table.Th>Punti</Table.Th>
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>
                 {
-                  players.map((player: any) => {
+                  players.map((player: any, index: number) => {
                     return (
                       <Table.Tr key={player.id}>
+                        <Table.Td fw="bold">{index + 1}</Table.Td>
                         <Table.Td>{player.data.name}</Table.Td>
                         <Table.Td>{player.data.ranking}</Table.Td>
                       </Table.Tr>

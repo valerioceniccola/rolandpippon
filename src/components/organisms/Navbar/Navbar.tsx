@@ -45,7 +45,7 @@ export function Navbar() {
   const items = links.map((link) => {
 
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>
+      <Menu.Item key={item.link} className={classes.dropdownItem}>
         <NavLink
           to={item.link}
           className={classes.subLink}
@@ -66,7 +66,7 @@ export function Navbar() {
               <Title tt="uppercase" order={5}>{link.label}</Title>
             </NavLink>
           </Menu.Target>
-          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+          <Menu.Dropdown className={classes.dropdown}>{menuItems}</Menu.Dropdown>
         </Menu>
       );
     }
@@ -123,14 +123,14 @@ export function Navbar() {
                   if (link.links) {
                     return (
                       <Box key={link.link}>
-                        <UnstyledButton className={classes.link} onClick={toggleLinks}>
-                          <Center inline>
-                            <Box component="span" mr={5}>
-                              {link.label}
-                            </Box>
-                          </Center>
-                        </UnstyledButton>
-                        <Collapse in={linksOpened} className={classes.subMenu}>
+                        <NavLink
+                          to={link.link}
+                          className={classes.link}
+                          onClick={() => closeDrawer()}
+                        >
+                          {link.label}
+                        </NavLink>
+                        <Box className={classes.subMenu}>
                           {link.links.map((item) => (
                             <NavLink
                               className={classes.link}
@@ -141,7 +141,7 @@ export function Navbar() {
                               {item.label}
                             </NavLink>
                           ))}
-                        </Collapse>
+                        </Box>
                       </Box>
                     )
                   } else {
