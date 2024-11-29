@@ -74,7 +74,7 @@ export function Tournament() {
         <title>Tornei</title>
       </Helmet>
       {
-        (!isLoading && tournament && winner && winner2 && winner3) ?
+        (!isLoading && tournament) ?
           <Box mb="lg">
 
             {
@@ -89,43 +89,53 @@ export function Tournament() {
             <Tabs color="green" defaultValue="info">
 
               <Tabs.List mb="lg">
-                <Tabs.Tab value="info">Informazioni</Tabs.Tab>
-                <Tabs.Tab value="results">Risultati</Tabs.Tab>
-                <Tabs.Tab value="rules">Regolamento</Tabs.Tab>
+                <Tabs.Tab value="info">Il torneo</Tabs.Tab>
+                {
+                  tournament.challongeUrl &&
+                  <Tabs.Tab value="results">Risultati</Tabs.Tab>
+                }
+                {
+                  tournament.rules &&
+                  <Tabs.Tab value="rules">Regolamento</Tabs.Tab>
+                }
               </Tabs.List>
 
               <Tabs.Panel value="info">
 
-                <Box mb="lg" py="md">
-                  <Paper p="lg" className={classes.winners}>
-                    <SimpleGrid cols={3}>
-                      {
-                        // Ciclo 3 elementi
-                        [winner, winner2, winner3].map((player: any, index: number) => (
-                          <div key={index}>
-                            <Title order={5} tt="uppercase" mb="sm">
-                              <Group justify="flex-start">
-                                <div>🏆</div> {index + 1}° Posto
+                {
+                  (winner && winner2 && winner3) &&
+                  <Box mb="lg" py="md">
+                    <Paper p="lg" className={classes.winners}>
+                      <SimpleGrid cols={3}>
+                        {
+                          // Ciclo 3 elementi
+                          [winner, winner2, winner3].map((player: any, index: number) => (
+                            <div key={index}>
+                              <Title order={5} tt="uppercase" mb="sm">
+                                <Group justify="flex-start">
+                                  <div>🏆</div>
+                                  {index + 1}° Posto
+                                </Group>
+                              </Title>
+                              <Group gap="md">
+                                <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
+                                <Anchor component={NavLink} to={`/players/${player.id}`}><Text fw="bold">{player.data.name}</Text></Anchor>
                               </Group>
-                            </Title>
-                            <Group gap="md">
-                              <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
-                              <Anchor component={NavLink} to={`/players/${player.id}`}><Text fw="bold">{player.data.name}</Text></Anchor>
-                            </Group>
-                          </div>
-                        ))
-                      }
-                    </SimpleGrid>
-                  </Paper>
-                </Box>
+                            </div>
+                          ))
+                        }
+                      </SimpleGrid>
+                    </Paper>
+                  </Box>
+                }
 
                 <Box mb="xl">
                   <Text>{tournament.description}</Text>
                 </Box>
 
-                <Box>
-                  {
-                    tournament.picflowId &&
+                {
+                  tournament.picflowId &&
+                  <Box>
                     <Paper className={classes.gallery}>
                       {
                         // Esempio id picflow: gal_4xrFVV48aamykpMu
@@ -133,25 +143,32 @@ export function Tournament() {
                         <picflow-gallery id={tournament.picflowId} lightbox="#000000E6"></picflow-gallery>
                       }
                     </Paper>
-                  }
-                </Box>
+                  </Box>
+                }
 
               </Tabs.Panel>
 
-              <Tabs.Panel value="results">
-                <Paper p="xs" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
-                  <div className={classes.tournamentInner}>
-                    <iframe
-                      src={`${tournament.challongeUrl}?multiplier=1`}
-                      style={{ width: '100%', height: 1200, border: 0 }}
-                    />
-                  </div>
-                </Paper>
-              </Tabs.Panel>
 
-              <Tabs.Panel value="rules">
-                <div dangerouslySetInnerHTML={{ __html: tournament.rules }}/>
-              </Tabs.Panel>
+              {
+                tournament.challongeUrl &&
+                <Tabs.Panel value="results">
+                  <Paper p="xs" bg="var(--mantine-color-gray-1)" className={classes.tournament}>
+                    <div className={classes.tournamentInner}>
+                      <iframe
+                        src={`${tournament.challongeUrl}?multiplier=1`}
+                        style={{ width: '100%', height: 1200, border: 0 }}
+                      />
+                    </div>
+                  </Paper>
+                </Tabs.Panel>
+              }
+
+              {
+                tournament.rules &&
+                <Tabs.Panel value="rules">
+                  <div dangerouslySetInnerHTML={{ __html: tournament.rules }}/>
+                </Tabs.Panel>
+              }
 
             </Tabs>
           </Box>

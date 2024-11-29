@@ -27,7 +27,7 @@ export function Dashboard() {
       <Title order={2} mb="xl" tt="uppercase">Tutti i tornei</Title>
       {
         (!isLoading && tournaments) ?
-          <SimpleGrid cols={{ base: 1, sm: 2 }}>
+          <SimpleGrid cols={{ base: 1 }}>
             {
               tournaments.map((tournament: any) => (
                 <CardTournament

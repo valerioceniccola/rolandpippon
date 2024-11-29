@@ -241,7 +241,7 @@ export function Admin(props: any) {
         const comboboxData = data.map((tournament) => {
           return {
             value: tournament.id,
-            label: tournament.data.name
+            label: `${tournament.data.name} - ${tournament.data.date}`
           }
         })
         setSelectDataTournaments(comboboxData)
@@ -340,7 +340,7 @@ export function Admin(props: any) {
                   <TextInput
                     disabled={isLoading}
                     required
-                    label="Data mese anno (es: 07/24)"
+                    label="Data di inizio (es: 07/24)"
                     mb="md"
                     {...formHandleTournament.getInputProps('dateStart')}
                   />
@@ -351,7 +351,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Vincitore (slug es: nome-cognome)"
                     mb="md"
                     {...formHandleTournament.getInputProps('winner')}
@@ -359,7 +358,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Secondo posto (slug es: nome-cognome)"
                     mb="md"
                     {...formHandleTournament.getInputProps('winner2')}
@@ -367,7 +365,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Terzo posto (slug es: nome-cognome)"
                     mb="md"
                     {...formHandleTournament.getInputProps('winner3')}
@@ -377,8 +374,7 @@ export function Admin(props: any) {
                 <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
-                    disabled={isLoading || tournamentSelected}
-                    required
+                    disabled={isLoading}
                     label="Url Challonge (per iframe)"
                     mb="md"
                     {...formHandleTournament.getInputProps('challongeUrl')}
@@ -386,7 +382,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Id gallery picflow (dall'embed)"
                     mb="md"
                     {...formHandleTournament.getInputProps('picflowId')}
@@ -405,7 +400,6 @@ export function Admin(props: any) {
 
                 <Textarea
                   disabled={isLoading}
-                  required
                   label="Regolamento (in html)"
                   mb="md"
                   rows={4}
