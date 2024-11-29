@@ -47,7 +47,8 @@ const links = [
     link: '/',
     label: 'Doppi 2025',
     links: [
-      // { link: '/tournament/5', label: 'Pippon Open' },
+      { link: '/tournament/10', label: 'Double Pippon' },
+      { link: '/tournament/11', label: 'Pippon Davis' },
     ],
   },
   { link: '/ranking', label: 'Ranking' },
