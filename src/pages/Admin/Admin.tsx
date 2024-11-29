@@ -4,7 +4,7 @@ import {
   ComboboxData,
   Container,
   CopyButton,
-  Divider,
+  Divider, NumberInput,
   PasswordInput,
   Select,
   SimpleGrid,
@@ -477,7 +477,7 @@ export function Admin(props: any) {
                     {...formHandlePlayer.getInputProps('racket')}
                   />
 
-                  <TextInput
+                  <NumberInput
                     disabled={isLoading}
                     required
                     label="Ranking"

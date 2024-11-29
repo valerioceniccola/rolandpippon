@@ -20,20 +20,37 @@ const links = [
     link: '/',
     label: 'Singolari 2023',
     links: [
-      { link: '/tournament/1', label: 'Prima edizione' },
+      { link: '/tournament/1', label: 'Roland Pippon' },
     ],
   },
   {
     link: '/',
     label: 'Singolari 2024',
     links: [
-      { link: '/tournament/2', label: 'Seconda edizione' },
-      { link: '/tournament/3', label: 'Autumn Pippon' },
-      { link: '/tournament/4', label: 'Finals' },
+      { link: '/tournament/2', label: 'Roland Pippon' },
+      { link: '/tournament/3', label: '⚡️Autumn Pippon' },
+      { link: '/tournament/4', label: 'Pippon Finals' },
+    ],
+  },
+  {
+    link: '/',
+    label: 'Singolari 2025',
+    links: [
+      { link: '/tournament/5', label: 'Pippon Open' },
+      { link: '/tournament/6', label: '⚡️Spring Pippon' },
+      { link: '/tournament/7', label: 'Roland Pippon' },
+      { link: '/tournament/8', label: '⚡️Autumn Pippon' },
+      { link: '/tournament/9', label: 'Pippon Finals' },
+    ],
+  },
+  {
+    link: '/',
+    label: 'Doppi 2025',
+    links: [
+      // { link: '/tournament/5', label: 'Pippon Open' },
     ],
   },
   { link: '/ranking', label: 'Ranking' },
-  { link: '/players', label: "Tennisti" },
 ];
 
 export function Navbar() {
@@ -89,7 +106,7 @@ export function Navbar() {
         <Image
           src="/logo.svg"
           fit="contain"
-          h={140}
+          h={150}
           pt={20}
           pb={10}
         />

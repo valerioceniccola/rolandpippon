@@ -13,8 +13,13 @@ export function Dashboard() {
 
     getAllTournaments()
       .then((data) => {
-        data.sort((a: any, b: any) => b.data.dateStart.seconds - a.data.dateStart.seconds)
-        setTournaments(data)
+
+        const dataFiltered =
+          data
+            .sort((a: any, b: any) => b.data.dateStart.seconds - a.data.dateStart.seconds)
+            .filter((item: any) => item.data.dateStart.seconds < Date.now() / 1000)
+
+        setTournaments(dataFiltered)
       }).finally(() => {
       setIsLoading(false)
     })

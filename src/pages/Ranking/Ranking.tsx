@@ -1,7 +1,8 @@
-import { Center, Container, Loader, Table } from "@mantine/core"
+import { Anchor, Avatar, Center, Container, Group, Loader, Table, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getAllPlayers } from "../../api/api.ts"
 import { Helmet } from "react-helmet"
+import { NavLink } from "react-router-dom"
 
 export function Ranking() {
 
@@ -32,7 +33,7 @@ export function Ranking() {
         (!isLoading && players) ?
           <Container size="sm">
 
-            <Table stickyHeader stickyHeaderOffset={60} verticalSpacing="lg">
+            <Table stickyHeader verticalSpacing="lg">
               <Table.Thead>
                 <Table.Tr>
                   <Table.Th w={50}>Pos</Table.Th>
@@ -46,7 +47,14 @@ export function Ranking() {
                     return (
                       <Table.Tr key={player.id}>
                         <Table.Td fw="bold">{index + 1}</Table.Td>
-                        <Table.Td>{player.data.name}</Table.Td>
+                        <Table.Td>
+                          <Group>
+                            <Avatar src={player.data.img} alt={player.data.name} />
+                            <Anchor component={NavLink} to={`/players/${player.id}`}>
+                              <Text fw="bold">{player.data.name}</Text>
+                            </Anchor>
+                          </Group>
+                        </Table.Td>
                         <Table.Td>{player.data.ranking}</Table.Td>
                       </Table.Tr>
                     )
