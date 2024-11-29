@@ -35,29 +35,38 @@ export function Tournament() {
         if (data !== undefined) {
           setTournament(data)
 
-          getPlayer(data.winner)
-            .then((player) => {
-              setWinner({
-                data: player,
-                id: data.winner
+          data.winner ?
+            getPlayer(data.winner)
+              .then((player) => {
+                setWinner({
+                  data: player,
+                  id: data.winner
+                })
               })
-            })
+            :
+            setWinner(null)
 
-          getPlayer(data.winner2)
-            .then((player) => {
-              setWinner2({
-                data: player,
-                id: data.winner2
+          data.winner2 ?
+            getPlayer(data.winner2)
+              .then((player) => {
+                setWinner2({
+                  data: player,
+                  id: data.winner2
+                })
               })
-            })
+            :
+            setWinner(null)
 
-          getPlayer(data.winner3)
-            .then((player) => {
-              setWinner3({
-                data: player,
-                id: data.winner3
+          data.winner3 ?
+            getPlayer(data.winner3)
+              .then((player) => {
+                setWinner3({
+                  data: player,
+                  id: data.winner3
+                })
               })
-            })
+            :
+            setWinner(null)
 
           setIsLoading(false)
 

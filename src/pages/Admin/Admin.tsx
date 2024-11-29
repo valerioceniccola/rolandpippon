@@ -375,7 +375,7 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    label="Url Challonge (per iframe)"
+                    label="Url Challonge (per iframe, es: https://challonge.com/it/nometorneo/module)"
                     mb="md"
                     {...formHandleTournament.getInputProps('challongeUrl')}
                   />
