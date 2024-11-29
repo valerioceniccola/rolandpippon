@@ -213,7 +213,7 @@ export function Navbar() {
                                 order={6}
                                 key={item.label}
                                 onClick={() => {
-                                  item.onSelect
+                                  item.onSelect()
                                   closeDrawer()
                                 }}
                                 className={classes.subMenuTitle}
@@ -227,7 +227,7 @@ export function Navbar() {
                                     order={5}
                                     key={subItem.label}
                                     onClick={() => {
-                                      subItem.onSelect
+                                      subItem.onSelect()
                                       closeDrawer()
                                     }}
                                     className={classes.subMenuItem}
@@ -248,8 +248,10 @@ export function Navbar() {
                         key={link.label}
                         className={classes.link}
                         onClick={() => {
-                          link.onSelect
-                          closeDrawer()
+                          if (link.onSelect) {
+                            link.onSelect()
+                            closeDrawer()
+                          }
                         }}
                       >
                         {link.label}
