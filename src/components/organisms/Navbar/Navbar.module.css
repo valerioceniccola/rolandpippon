@@ -61,7 +61,7 @@
 .link {
   cursor: pointer;
   line-height: 1;
-  padding: rem(8px) rem(12px);
+  padding: rem(10px) rem(12px);
   border-radius: var(--mantine-radius-sm);
   text-decoration: none;
   color: var(--mantine-color-text);
