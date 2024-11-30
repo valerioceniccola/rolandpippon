@@ -2,6 +2,7 @@ import { Menu, Group, Center, Burger, Container, Image, Text } from '@mantine/co
 import { useDisclosure } from '@mantine/hooks';
 import classes from './Footer.module.css';
 import { useEffect, useState } from "react"
+import { projectName } from "../../../utils/constants.ts"
 
 export function Footer() {
 
@@ -14,7 +15,7 @@ export function Footer() {
   return (
     <Container className={classes.afterFooter}>
       <Text c="dimmed" size="sm">
-        © {currentYear} All rights reserved. Roland Pippon 🌱🎾
+        © {currentYear} All rights reserved. ${projectName} 🌱🎾
       </Text>
     </Container>
   );

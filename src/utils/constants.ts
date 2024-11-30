@@ -1,2 +1,2 @@
-export const appVersion: string = "0.6"
-export const projectName: string = "Roland Pippon"
+export const appVersion: string = "0.9"
+export const projectName: string = "Pippon Tour"

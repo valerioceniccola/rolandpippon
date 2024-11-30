@@ -16,6 +16,7 @@ import classes from './Navbar.module.css';
 import { NavLink, useNavigate } from "react-router-dom"
 import { Dropdown } from "react-nested-dropdown"
 import 'react-nested-dropdown/dist/styles.css'
+import { projectName } from "../../../utils/constants.ts"
 
 export function Navbar() {
 
@@ -181,7 +182,7 @@ export function Navbar() {
           opened={drawerOpened}
           onClose={closeDrawer}
           size="100%"
-          title="Roland Pippon"
+          title={projectName}
           hiddenFrom="sm"
           zIndex={1000000}
         >
@@ -198,7 +199,7 @@ export function Navbar() {
                       <Box key={link.label}>
                         <Title
                           tt="uppercase"
-                          className={classes.link}
+                          className={classes.linkMobile}
                         >
                           {link.label}
                         </Title>
@@ -212,10 +213,6 @@ export function Navbar() {
                                 tt="uppercase"
                                 order={6}
                                 key={item.label}
-                                onClick={() => {
-                                  item.onSelect()
-                                  closeDrawer()
-                                }}
                                 className={classes.subMenuTitle}
                               >
                                 {item.label}
@@ -246,7 +243,7 @@ export function Navbar() {
                       <Title
                         tt="uppercase"
                         key={link.label}
-                        className={classes.link}
+                        className={classes.linkMobile}
                         onClick={() => {
                           if (link.onSelect) {
                             link.onSelect()

@@ -1,7 +1,8 @@
-import { Box, Center, Loader, SimpleGrid, Title } from "@mantine/core"
+import { Box, Center, Loader, SimpleGrid, Text, Title } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getAllTournaments } from "../../api/api.ts"
 import { CardTournament } from "../../components/molecules/CardTournament/CardTournament.tsx"
+import { Helmet } from "react-helmet"
 
 export function Dashboard() {
 
@@ -29,7 +30,13 @@ export function Dashboard() {
 
   return (
     <>
-      <Title order={2} mb="xl" tt="uppercase">Tutti i tornei</Title>
+      <Helmet>
+        <title>Tutti i tornei</title>
+      </Helmet>
+      <Box mb="xl">
+        <Title order={2} mb="md" tt="uppercase">Tutti i tornei</Title>
+        <Text>La lista di tutti i tornei giocati e in corso del Pippon Tour in ordine cronologico</Text>
+      </Box>
       {
         (!isLoading && tournaments) ?
           <SimpleGrid cols={{ base: 1 }}>
