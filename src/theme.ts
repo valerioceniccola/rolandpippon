@@ -6,21 +6,21 @@ export const theme = createTheme({
   defaultRadius: "md",
   colors: {
     shGreen: [
-      "#f0faf5",
-      "#e1f2e9",
-      "#bce4d0",
-      "#95d6b5",
-      "#75ca9e",
-      "#61c390",
-      "#55c088",
-      "#46a975",
-      "#3b9667",
-      "#2b8257"
+      "#eef2fb",
+      "#dae0f1",
+      "#b1bee6",
+      "#859adb",
+      "#617bd2",
+      "#4b68cd",
+      "#3f5ecc",
+      "#314eb4",
+      "#2a45a2",
+      "#1f3b8f"
     ]
   },
   defaultGradient: {
-    from: '#0ba26a',
-    to: '#49eea9',
+    from: '#314eb4',
+    to: '#1f3b8f',
     deg: 45
   },
   primaryColor: 'shGreen',

@@ -127,7 +127,7 @@ export function Navbar() {
         <Image
           src="/logo.svg"
           fit="contain"
-          h={150}
+          h={110}
           pt={20}
           pb={10}
         />

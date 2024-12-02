@@ -95,7 +95,7 @@ export function Tournament() {
 
               <Title tt="uppercase" order={1} mb="xl">{tournament.name}</Title>
 
-              <Tabs color="green" defaultValue="info">
+              <Tabs color="shGreen" defaultValue="info">
 
                 <Tabs.List mb="lg">
                   <Tabs.Tab value="info">Il torneo</Tabs.Tab>
