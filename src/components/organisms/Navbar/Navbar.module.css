@@ -5,6 +5,19 @@
   background-size: cover;
   border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
   margin-bottom: rem(40px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(5px) rem(20px);
+    margin-bottom: rem(30px);
+
+    /* logo */
+    > a img {
+      height: rem(90px) !important;
+    }
+  }
 }
 
 .header {
