@@ -10,13 +10,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: rem(5px) rem(20px);
     margin-bottom: rem(30px);
+
+    a {
+      display: block;
+    }
 
     /* logo */
     > a img {
       height: rem(90px) !important;
+      width: auto !important;
     }
+  }
+}
+
+.logo {
+  height: rem(110px);
+  width: auto;
+  margin: 0 auto;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(90px);
+    margin: 0;
   }
 }
 

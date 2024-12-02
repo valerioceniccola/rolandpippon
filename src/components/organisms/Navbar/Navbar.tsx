@@ -126,8 +126,8 @@ export function Navbar() {
       <NavLink to="/">
         <Image
           src="/logo.svg"
+          className={classes.logo}
           fit="contain"
-          h={110}
           pt={20}
           pb={10}
         />
