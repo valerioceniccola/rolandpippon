@@ -53,7 +53,6 @@ export function Admin(props: any) {
       name: '',
       description: '',
       racket: '',
-      img: '',
       ranking: 0
     },
   })
@@ -459,15 +458,7 @@ export function Admin(props: any) {
 
                 </SimpleGrid>
 
-                <SimpleGrid cols={{ base: 1, sm: 3 }}>
-
-                  <TextInput
-                    disabled={isLoading}
-                    required
-                    label="Url avatar (da postimages)"
-                    mb="md"
-                    {...formHandlePlayer.getInputProps('img')}
-                  />
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
                     disabled={isLoading}
