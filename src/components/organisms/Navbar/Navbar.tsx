@@ -178,92 +178,89 @@ export function Navbar() {
           hiddenFrom="sm"
         />
 
-        <Drawer
-          opened={drawerOpened}
-          onClose={closeDrawer}
-          size="100%"
-          title={projectName}
-          hiddenFrom="sm"
-          zIndex={1000000}
-        >
+      </header>
 
-          <ScrollArea h="calc(100vh)" mx="-md">
+      <Drawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        size="100%"
+        title={projectName}
+        hiddenFrom="sm"
+        zIndex={1000000}
+      >
 
-            <Divider mb="sm"/>
+        <ScrollArea mx="-md">
 
-            <Box className={classes.linksMobile}>
-              {
-                links.map((link) => {
-                  if (link.type === 'dropdown') {
-                    return (
-                      <Box key={link.label}>
-                        <Title
-                          tt="uppercase"
-                          className={classes.linkMobile}
-                        >
-                          {link.label}
-                        </Title>
-                        <Box className={classes.subMenu}>
-                          {link.data!.map((item: any) => (
-                            <div
-                              key={item.label}
-                              className={classes.subMenuBlock}
-                            >
-                              <Title
-                                tt="uppercase"
-                                order={6}
-                                key={item.label}
-                                className={classes.subMenuTitle}
-                              >
-                                {item.label}
-                              </Title>
-                              {
-                                item.items.map((subItem: any) => (
-                                  <Title
-                                    tt="uppercase"
-                                    order={5}
-                                    key={subItem.label}
-                                    onClick={() => {
-                                      subItem.onSelect()
-                                      closeDrawer()
-                                    }}
-                                    className={classes.subMenuItem}
-                                  >
-                                    {subItem.label}
-                                  </Title>
-                                ))
-                              }
-                            </div>
-                          ))}
-                        </Box>
-                      </Box>
-                    )
-                  } else {
-                    return (
+          <Divider mb="sm"/>
+
+            {
+              links.map((link) => {
+                if (link.type === 'dropdown') {
+                  return (
+                    <Box key={link.label}>
                       <Title
                         tt="uppercase"
-                        key={link.label}
                         className={classes.linkMobile}
-                        onClick={() => {
-                          if (link.onSelect) {
-                            link.onSelect()
-                            closeDrawer()
-                          }
-                        }}
                       >
                         {link.label}
                       </Title>
-                    )
-                  }
-                })
-              }
-            </Box>
+                      <Box className={classes.subMenu}>
+                        {link.data!.map((item: any) => (
+                          <div
+                            key={item.label}
+                            className={classes.subMenuBlock}
+                          >
+                            <Title
+                              tt="uppercase"
+                              order={6}
+                              key={item.label}
+                              className={classes.subMenuTitle}
+                            >
+                              {item.label}
+                            </Title>
+                            {
+                              item.items.map((subItem: any) => (
+                                <Title
+                                  tt="uppercase"
+                                  order={5}
+                                  key={subItem.label}
+                                  onClick={() => {
+                                    subItem.onSelect()
+                                    closeDrawer()
+                                  }}
+                                  className={classes.subMenuItem}
+                                >
+                                  {subItem.label}
+                                </Title>
+                              ))
+                            }
+                          </div>
+                        ))}
+                      </Box>
+                    </Box>
+                  )
+                } else {
+                  return (
+                    <Title
+                      tt="uppercase"
+                      key={link.label}
+                      className={classes.linkMobile}
+                      onClick={() => {
+                        if (link.onSelect) {
+                          link.onSelect()
+                          closeDrawer()
+                        }
+                      }}
+                    >
+                      {link.label}
+                    </Title>
+                  )
+                }
+              })
+            }
 
-
-          </ScrollArea>
-        </Drawer>
-
-      </header>
+        </ScrollArea>
+      </Drawer>
 
     </Box>
   );
