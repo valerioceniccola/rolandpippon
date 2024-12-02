@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { getAllPlayers } from "../../api/api.ts"
 import { Helmet } from "react-helmet"
 import { NavLink } from "react-router-dom"
+import { getShortName } from "../../utils/utils.ts"
 
 export function Ranking() {
 
@@ -54,7 +55,9 @@ export function Ranking() {
                               alt={player.data.name}
                             />
                             <Anchor component={NavLink} to={`/players/${player.id}`}>
-                              <Text fw="bold">{player.data.name}</Text>
+                              <Text fw="bold">
+                                {getShortName(player.data.name)}
+                              </Text>
                             </Anchor>
                           </Group>
                         </Table.Td>
