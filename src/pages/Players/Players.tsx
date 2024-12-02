@@ -59,7 +59,7 @@ export function Players() {
                     style={{cursor: 'pointer'}}
                   >
                     <Avatar
-                      src={player.data.img}
+                      src={`/players/${player.id}.jpg`}
                       size={120}
                       radius={120}
                       mx="auto"
