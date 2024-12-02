@@ -4,6 +4,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
 import { Helmet } from "react-helmet"
 import classes from "./Tournament.module.css"
+import { getShortName } from "../../utils/utils.ts"
 
 
 export function Tournament() {
@@ -118,28 +119,30 @@ export function Tournament() {
                         <SimpleGrid cols={3}>
                           {
                             // Ciclo 3 elementi
-                            [winner, winner2, winner3].map((player: any, index: number) => (
-                              <div key={index}>
-                                <Title order={5} tt="uppercase" mb="sm">
-                                  <Group justify="flex-start">
-                                    <div>🏆</div>
-                                    {index + 1}° Posto
+                            [winner, winner2, winner3].map((player: any, index: number) => {
+                              return (
+                                <div key={index}>
+                                  <Title order={5} tt="uppercase" mb="sm">
+                                    <Group justify="flex-start">
+                                      <div>🏆</div>
+                                      {index + 1}° Posto
+                                    </Group>
+                                  </Title>
+                                  <Group gap="md">
+                                    <Avatar
+                                      src={`/players/${player.id}.jpg`}
+                                      alt={player.data.name}
+                                      style={{ border: '2px solid #fff' }}
+                                    />
+                                    <Anchor component={NavLink} to={`/players/${player.id}`}>
+                                      <Text fw="bold">
+                                        {getShortName(player.data.name)}
+                                      </Text>
+                                    </Anchor>
                                   </Group>
-                                </Title>
-                                <Group gap="md">
-                                  <Avatar
-                                    src={`/players/${player.id}.jpg`}
-                                    alt={player.data.name}
-                                    style={{ border: '2px solid #fff' }}
-                                  />
-                                  <Anchor component={NavLink} to={`/players/${player.id}`}>
-                                    <Text fw="bold">
-                                      {player.data.name}
-                                    </Text>
-                                  </Anchor>
-                                </Group>
-                              </div>
-                            ))
+                                </div>
+                              )
+                            })
                           }
                         </SimpleGrid>
                       </Paper>

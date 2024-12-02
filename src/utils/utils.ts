@@ -38,3 +38,10 @@ export const getMonthYearFromFirebaseDatestamp = (datestamp: any) => {
   const year = date.getFullYear().toString().slice(-2);
   return `${month}/${year}`;
 }
+
+export const getShortName = (fullName: string) => {
+  const splitted = fullName.trim().split(" ")
+  const name = splitted[0][0] + '.'
+  const surname = splitted.slice(1).join(' ')
+  return name + ' ' + surname
+}
