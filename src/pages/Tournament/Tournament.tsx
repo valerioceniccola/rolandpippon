@@ -127,7 +127,11 @@ export function Tournament() {
                                   </Group>
                                 </Title>
                                 <Group gap="md">
-                                  <Avatar src={player.data.img} alt={player.data.name} style={{ border: '2px solid #fff' }}/>
+                                  <Avatar
+                                    src={`/players/${player.id}.jpg`}
+                                    alt={player.data.name}
+                                    style={{ border: '2px solid #fff' }}
+                                  />
                                   <Anchor component={NavLink} to={`/players/${player.id}`}>
                                     <Text fw="bold">
                                       {player.data.name}

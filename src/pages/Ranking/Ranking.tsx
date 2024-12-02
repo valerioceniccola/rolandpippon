@@ -49,7 +49,10 @@ export function Ranking() {
                         <Table.Td fw="bold">{index + 1}</Table.Td>
                         <Table.Td>
                           <Group>
-                            <Avatar src={player.data.img} alt={player.data.name} />
+                            <Avatar
+                              src={`/players/${player.id}.jpg`}
+                              alt={player.data.name}
+                            />
                             <Anchor component={NavLink} to={`/players/${player.id}`}>
                               <Text fw="bold">{player.data.name}</Text>
                             </Anchor>

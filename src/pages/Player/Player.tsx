@@ -44,7 +44,7 @@ export function Player() {
 
               <div style={{ textAlign: 'center' }}>
                 <Avatar
-                  src={player.img}
+                  src={`/players/${player.id}.jpg`}
                   alt={player.name}
                   mb="sm"
                   style={{ display: 'inline-block', border: '3px solid #fff' }}
