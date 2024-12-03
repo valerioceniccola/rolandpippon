@@ -3,9 +3,9 @@ import {
   Blockquote,
   Box, Button,
   Center,
-  Container, Divider,
+  Container, Divider, Grid,
   Group,
-  Loader, Paper, SimpleGrid,
+  Loader, Paper, SimpleGrid, Skeleton,
   Tabs,
   Text,
   Title,
@@ -30,7 +30,6 @@ export function Players() {
 
     getAllPlayers()
       .then((data) => {
-        console.log(data)
         setPlayers(data)
       })
       .finally(() => {
@@ -56,7 +55,7 @@ export function Players() {
                     withBorder
                     p="lg"
                     onClick={() => navigate(`/players/${player.id}`)}
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                   >
                     <Avatar
                       src={`/players/${player.id}.jpg`}
@@ -86,9 +85,15 @@ export function Players() {
 
           </Container>
           :
-          <Center>
-            <Loader size="sm" color="gray"/>
-          </Center>
+          <>
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+              {
+                [...Array(9)].map((item: number, ic: number) => (
+                  <Skeleton key={ic} height={280} style={{ aspectRatio: 1 }}/>
+                ))
+              }
+            </SimpleGrid>
+          </>
       }
     </>
   )

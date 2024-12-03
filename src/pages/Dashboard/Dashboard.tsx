@@ -1,4 +1,4 @@
-import { Box, Center, Loader, SimpleGrid, Text, Title } from "@mantine/core"
+import { Box, Center, Container, Loader, SimpleGrid, Skeleton, Text, Title } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getAllTournaments } from "../../api/api.ts"
 import { CardTournament } from "../../components/molecules/CardTournament/CardTournament.tsx"
@@ -54,9 +54,13 @@ export function Dashboard() {
             }
           </SimpleGrid>
           :
-          <Center>
-            <Loader size="sm" color="gray"/>
-          </Center>
+          <>
+            {
+              [...Array(5)].map((item: number, ic: number) => (
+                <Skeleton key={ic} height={180} mb="md"/>
+              ))
+            }
+          </>
       }
     </>
   )

@@ -1,4 +1,4 @@
-import { Anchor, Avatar, Center, Container, Group, Loader, Table, Text } from "@mantine/core"
+import { Anchor, Avatar, Center, Container, Group, Loader, SimpleGrid, Skeleton, Table, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getAllPlayers } from "../../api/api.ts"
 import { Helmet } from "react-helmet"
@@ -71,9 +71,15 @@ export function Ranking() {
 
           </Container>
           :
-          <Center>
-            <Loader size="sm" color="gray"/>
-          </Center>
+          <>
+            <Container size="sm">
+              {
+                [...Array(16)].map((item: number, ic: number) => (
+                  <Skeleton key={ic} height={70} mb="md"/>
+                ))
+              }
+            </Container>
+          </>
       }
     </>
   )
