@@ -1,4 +1,4 @@
-import { Avatar, Center, Container, Divider, Group, Loader, Paper, Text, Title } from "@mantine/core"
+import { Avatar, Center, Container, Divider, Group, Loader, Paper, Skeleton, Text, Title } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getPlayer } from "../../api/api.ts"
@@ -40,8 +40,8 @@ export function Player() {
             <Helmet>
               <title>{player.name}</title>
             </Helmet>
-            <Container size="sm">
 
+            <Container size="sm">
               <div style={{ textAlign: 'center' }}>
                 <Avatar
                   src={`/players/${params.slug}.jpg`}
@@ -71,9 +71,22 @@ export function Player() {
             </Container>
           </>
           :
-          <Center>
-            <Loader size="sm" color="gray"/>
-          </Center>
+          <>
+            <Container size="sm">
+              <div style={{ textAlign: 'center' }}>
+
+                <Center>
+                  <Skeleton height={160} width={160} mb="md" radius="50%"/>
+                </Center>
+
+                <Center>
+                  <Skeleton height={40} width="70%" mb="md"/>
+                </Center>
+
+                <Skeleton height={160} mb="md"/>
+              </div>
+            </Container>
+          </>
       }
     </>
   )
