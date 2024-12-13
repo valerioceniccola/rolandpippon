@@ -1,4 +1,18 @@
-import { Anchor, Avatar, Badge, Box, Center, Group, Loader, Paper, SimpleGrid, Tabs, Text, Title } from "@mantine/core"
+import {
+  Anchor,
+  Avatar,
+  Badge,
+  Blockquote,
+  Box,
+  Center,
+  Group,
+  Loader,
+  Paper,
+  SimpleGrid,
+  Tabs,
+  Text,
+  Title
+} from "@mantine/core"
 import { useEffect, useState } from "react"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { getPlayer, getTournament } from "../../api/api.ts"
@@ -151,6 +165,12 @@ export function Tournament() {
 
                   <Box mb="xl">
                     <Text>{tournament.description}</Text>
+                  </Box>
+
+                  <Box mb="xl">
+                    <Blockquote color="blue" radius="md" iconSize={32} mt="xl">
+                      Quota di iscrizione al torneo
+                    </Blockquote>
                   </Box>
 
                   {

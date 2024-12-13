@@ -45,6 +45,7 @@ export function Admin(props: any) {
       challongeUrl: '',
       rules: '',
       paypalUrl: '',
+      tournamentFee: '',
     },
   })
 
@@ -283,7 +284,8 @@ export function Admin(props: any) {
                         challongeUrl: data.challongeUrl,
                         rules: data.rules,
                         picflowId: data.picflowId,
-                        paypalUrl: data.paypalUrl
+                        paypalUrl: data.paypalUrl,
+                        tournamentFee: data.tournamentFee,
                       })
                     }
                   }
@@ -328,7 +330,7 @@ export function Admin(props: any) {
 
                 </SimpleGrid>
 
-                <SimpleGrid cols={{ base: 1, sm: 3 }}>
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
                     disabled={isLoading}
@@ -337,6 +339,19 @@ export function Admin(props: any) {
                     mb="md"
                     {...formHandleTournament.getInputProps('paypalUrl')}
                   />
+
+                  <TextInput
+                    disabled={isLoading}
+                    required
+                    label="Quota in euro"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('tournamentFee')}
+                  />
+
+
+                </SimpleGrid>
+
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
                     disabled={isLoading}
