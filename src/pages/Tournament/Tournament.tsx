@@ -170,7 +170,7 @@ export function Tournament() {
                   {
                     (tournament.tournamentFee && tournament.paypalUrl) &&
                     <Box mb="xl">
-                      <Blockquote radius="md" mt="xl">
+                      <Blockquote color="green" radius="md" mt="xl">
                         <Box mb="md">
                           <Title order={3} mb="sm">Le iscrizioni sono aperte</Title>
                           <Text mb="sm">Quota di iscrizione: <strong>{tournament.tournamentFee}€</strong></Text>
@@ -182,6 +182,7 @@ export function Tournament() {
                           component={NavLink}
                           to={`https://www.paypal.com/pool/${tournament.paypalUrl}`}
                           target="_blank"
+                          color="green"
                         >
                           Paga quota con Paypal ({tournament.tournamentFee}€)
                         </Button>
