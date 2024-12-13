@@ -168,7 +168,7 @@ export function Tournament() {
                   </Box>
 
                   {
-                    tournament.tournamentFee &&
+                    (tournament.tournamentFee && tournament.paypalUrl) &&
                     <Box mb="xl">
                       <Blockquote radius="md" mt="xl">
                         <Box mb="md">
