@@ -3,7 +3,7 @@ import {
   Avatar,
   Badge,
   Blockquote,
-  Box,
+  Box, Button,
   Center,
   Group,
   Loader,
@@ -167,11 +167,26 @@ export function Tournament() {
                     <Text>{tournament.description}</Text>
                   </Box>
 
-                  <Box mb="xl">
-                    <Blockquote color="blue" radius="md" iconSize={32} mt="xl">
-                      Quota di iscrizione al torneo
-                    </Blockquote>
-                  </Box>
+                  {
+                    tournament.tournamentFee &&
+                    <Box mb="xl">
+                      <Blockquote radius="md" mt="xl">
+                        <Box mb="md">
+                          <Text mb="sm">Quota di iscrizione al torneo è di <strong>{tournament.tournamentFee}€</strong>.</Text>
+                          <Text size="sm" fs="italic">È utilizzata per coprire i costi delle coppe, dei premi e di tutto il
+                            necessario per organizzare al meglio il torneo,
+                            garantendo un’esperienza piacevole e ben strutturata per tutti i partecipanti.</Text>
+                        </Box>
+                        <Button
+                          component={NavLink}
+                          to={`https://www.paypal.com/pool/${tournament.paypalUrl}`}
+                          target="_blank"
+                        >
+                          Paga quota con Paypal
+                        </Button>
+                      </Blockquote>
+                    </Box>
+                  }
 
                   {
                     tournament.picflowId &&
