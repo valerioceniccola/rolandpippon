@@ -172,7 +172,8 @@ export function Tournament() {
                     <Box mb="xl">
                       <Blockquote radius="md" mt="xl">
                         <Box mb="md">
-                          <Text mb="sm">Quota di iscrizione al torneo è di <strong>{tournament.tournamentFee}€</strong>.</Text>
+                          <Title order={3} mb="sm">Le iscrizioni sono aperte</Title>
+                          <Text mb="sm">Quota di iscrizione: <strong>{tournament.tournamentFee}€</strong></Text>
                           <Text size="sm" fs="italic">È utilizzata per coprire i costi delle coppe, dei premi e di tutto il
                             necessario per organizzare al meglio il torneo,
                             garantendo un’esperienza piacevole e ben strutturata per tutti i partecipanti.</Text>
@@ -182,7 +183,7 @@ export function Tournament() {
                           to={`https://www.paypal.com/pool/${tournament.paypalUrl}`}
                           target="_blank"
                         >
-                          Paga quota con Paypal
+                          Paga quota con Paypal ({tournament.tournamentFee}€)
                         </Button>
                       </Blockquote>
                     </Box>
