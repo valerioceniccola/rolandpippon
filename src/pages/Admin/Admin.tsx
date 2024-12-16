@@ -334,7 +334,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Paypal (es: 9awkIYLKa8 (dopo /pool))"
                     mb="md"
                     {...formHandleTournament.getInputProps('paypalUrl')}
@@ -342,7 +341,6 @@ export function Admin(props: any) {
 
                   <TextInput
                     disabled={isLoading}
-                    required
                     label="Quota in euro"
                     mb="md"
                     {...formHandleTournament.getInputProps('tournamentFee')}
