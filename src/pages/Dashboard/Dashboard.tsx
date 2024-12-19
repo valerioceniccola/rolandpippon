@@ -18,9 +18,12 @@ export function Dashboard() {
         const dataFiltered =
           data
             .sort((a: any, b: any) => b.data.dateStart.seconds - a.data.dateStart.seconds)
-            .filter((item: any) => item.data.dateStart.seconds < Date.now() / 1000)
+            .filter((item: any) =>
+              item.data.dateStart.seconds < Date.now() / 1000 || item.data.showInDashboard === true
+            )
 
         setTournaments(dataFiltered)
+
       }).finally(() => {
       setIsLoading(false)
     })
@@ -44,6 +47,7 @@ export function Dashboard() {
               tournaments.map((tournament: any) => (
                 <CardTournament
                   live={tournament.data.live}
+                  registrationsOpen={tournament.data.showInDashboard}
                   key={tournament.id}
                   id={tournament.id}
                   name={tournament.data.name}

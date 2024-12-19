@@ -8,9 +8,10 @@ interface Props {
   date: string,
   description: string,
   live?: boolean
+  registrationsOpen?: boolean
 }
 
-export const CardTournament = ({ id, name, date, description, live }: Props) => {
+export const CardTournament = ({ id, name, date, description, live, registrationsOpen }: Props) => {
 
   const navigate = useNavigate()
 
@@ -23,10 +24,17 @@ export const CardTournament = ({ id, name, date, description, live }: Props) => 
         onClick={() => navigate(`/tournament/${id}`)}
       >
 
-        {
-          live &&
-            <Badge size="lg" mb="lg" color="red" style={{cursor: 'pointer'}}>Live</Badge>
-        }
+        <Group>
+          {
+            live &&
+            <Badge size="lg" mb="md" color="red" style={{ cursor: 'pointer' }}>Live</Badge>
+          }
+          {
+            registrationsOpen &&
+            <Badge size="lg" mb="md" color="green" style={{ cursor: 'pointer' }}>Iscrizioni aperte</Badge>
+          }
+        </Group>
+
 
         <Title order={3} className={classes.title}>
           {name}

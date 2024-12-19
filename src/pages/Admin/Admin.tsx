@@ -34,6 +34,7 @@ export function Admin(props: any) {
     initialValues: {
       id: '',
       live: false,
+      showInDashboard: false,
       winner: '',
       winner2: '',
       winner3: '',
@@ -273,19 +274,20 @@ export function Admin(props: any) {
                     if (data) {
                       formHandleTournament.setValues({
                         id: value,
-                        live: data.live,
+                        live: data.live || false,
+                        showInDashboard: data.showInDashboard || false,
                         name: data.name,
                         date: data.date,
                         dateStart: getMonthYearFromFirebaseDatestamp(data.dateStart),
-                        winner: data.winner,
-                        winner2: data.winner2,
-                        winner3: data.winner3,
-                        description: data.description,
-                        challongeUrl: data.challongeUrl,
-                        rules: data.rules,
-                        picflowId: data.picflowId,
-                        paypalUrl: data.paypalUrl,
-                        tournamentFee: data.tournamentFee,
+                        winner: data.winner || '',
+                        winner2: data.winner2 || '',
+                        winner3: data.winner3 || '',
+                        description: data.description || '',
+                        challongeUrl: data.challongeUrl || '',
+                        rules: data.rules || '',
+                        picflowId: data.picflowId || '',
+                        paypalUrl: data.paypalUrl || '',
+                        tournamentFee: data.tournamentFee || '',
                       })
                     }
                   }
@@ -303,7 +305,25 @@ export function Admin(props: any) {
                 }
               })}>
 
-                <SimpleGrid cols={{ base: 1, sm: 3 }}>
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
+
+                  <Checkbox
+                    disabled={isLoading}
+                    label="Live"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('live', {type: 'checkbox'})}
+                  />
+
+                  <Checkbox
+                    disabled={isLoading}
+                    label="Iscrizioni aperte (Mostra in dashboard)"
+                    mb="md"
+                    {...formHandleTournament.getInputProps('showInDashboard', {type: 'checkbox'})}
+                  />
+
+                </SimpleGrid>
+
+                <SimpleGrid cols={{ base: 1, sm: 2 }}>
 
                   <TextInput
                     disabled={isLoading || tournamentSelected}
@@ -319,13 +339,6 @@ export function Admin(props: any) {
                     label="Nome"
                     mb="md"
                     {...formHandleTournament.getInputProps('name')}
-                  />
-
-                  <Checkbox
-                    disabled={isLoading}
-                    label="Live"
-                    mb="md"
-                    {...formHandleTournament.getInputProps('live', {type: 'checkbox'})}
                   />
 
                 </SimpleGrid>
@@ -345,7 +358,6 @@ export function Admin(props: any) {
                     mb="md"
                     {...formHandleTournament.getInputProps('tournamentFee')}
                   />
-
 
                 </SimpleGrid>
 
