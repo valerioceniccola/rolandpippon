@@ -434,7 +434,7 @@ export function Admin(props: any) {
 
                 <Textarea
                   disabled={isLoading}
-                  label="Regolamento (in html)"
+                  label="Regolamento (in html - https://text-html.com/)"
                   mb="md"
                   rows={4}
                   {...formHandleTournament.getInputProps('rules')}
