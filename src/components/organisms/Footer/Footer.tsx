@@ -15,7 +15,7 @@ export function Footer() {
   return (
     <Container className={classes.afterFooter}>
       <Text c="dimmed" size="sm">
-        © {currentYear} All rights reserved. ${projectName} 🌱🎾
+        © {currentYear} All rights reserved. {projectName} 🌱🎾
       </Text>
     </Container>
   );
