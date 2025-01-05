@@ -266,6 +266,7 @@ export function Admin(props: any) {
                 label="Modifica un torneo esistente"
                 data={selectDataTournaments}
                 allowDeselect={false}
+                searchable
                 onChange={async (value) => {
                   setTournamentSelected(value)
 
