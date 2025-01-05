@@ -213,7 +213,7 @@ export function Tournament() {
                       <div className={classes.tournamentInner}>
                         <iframe
                           src={`${tournament.challongeUrl}?multiplier=1`}
-                          style={{ width: '100%', height: 1200, border: 0 }}
+                          style={{ width: '100%', height: 1800, border: 0 }}
                         />
                       </div>
                     </Paper>
